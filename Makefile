@@ -1,9 +1,7 @@
-.PHONY: all build install reinstall clean
+.PHONY: build install uninstall reinstall clean
 
 FINDLIB_NAME=unix-errno
 BUILD=_build/lib
-
-all: build install
 
 build:
 	mkdir -p $(BUILD)
@@ -21,9 +19,11 @@ install:
 		-dll $(BUILD)/dllunix_errno.so \
 		-nodll $(BUILD)/libunix_errno.a
 
-reinstall:
+uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
-	$(MAKE) install
+
+reinstall: uninstall install
 
 clean:
 	rm -rf _build
+	rm -f lib/unix_errno.cm? lib/unix_errno.o
