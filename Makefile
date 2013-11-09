@@ -17,7 +17,7 @@ install:
 		$(BUILD)/unix_errno.cma \
 		$(BUILD)/unix_errno.cmxa \
 		-dll $(BUILD)/dllunix_errno.so \
-		-nodll $(BUILD)/libunix_errno.a
+		-nodll $(BUILD)/libunix_errno.a $(BUILD)/unix_errno.a
 
 uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
