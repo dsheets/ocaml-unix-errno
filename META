@@ -1,0 +1,6 @@
+version = "0.1"
+description = "Host-dependent UNIX errno-integer maps"
+requires = "unix"
+archive(byte) = "unix_errno.cma"
+archive(native) = "unix_errno.cmxa"
+exists_if = "unix_errno.cma"
