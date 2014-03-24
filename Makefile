@@ -6,7 +6,7 @@ BUILD=_build/lib
 
 build:
 	mkdir -p $(BUILD)
-	cc -c -o $(BUILD)/$(MOD_NAME)_stubs.o lib/$(MOD_NAME)_stubs.c
+	cc -c -o $(BUILD)/$(MOD_NAME)_stubs.o lib/$(MOD_NAME)_stubs.c -I$(shell ocamlc -where)
 	ocamlfind ocamlc -o $(BUILD)/$(MOD_NAME).cmi -c lib/$(MOD_NAME).mli
 	ocamlfind ocamlmklib -o $(BUILD)/$(MOD_NAME) -I $(BUILD) \
 		lib/$(MOD_NAME).ml $(BUILD)/$(MOD_NAME)_stubs.o
