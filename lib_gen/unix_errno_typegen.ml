@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2014 David Sheets <sheets@alum.mit.edu>
+ * Copyright (c) 2015 David Sheets <sheets@alum.mit.edu>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -15,12 +15,11 @@
  *
  *)
 
-type t = Unix.error
-type host
+open Ctypes
 
-val host : host
-
-val to_code : host:host -> t -> int option
-val of_code : host:host -> int -> t list
-
-val to_string : t -> string
+let () =
+  let type_oc = open_out "lib_gen/unix_errno_types_detect.c" in
+  let fmt = Format.formatter_of_out_channel type_oc in
+  Format.fprintf fmt "#include <errno.h>@.";
+  Cstubs.Types.write_c fmt (module Unix_errno_types.C);
+  close_out type_oc;

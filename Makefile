@@ -2,23 +2,33 @@
 
 FINDLIB_NAME=unix-errno
 MOD_NAME=unix_errno
-BUILD=_build/lib
+
+OCAML_LIB_DIR=$(shell ocamlc -where)
+
+CTYPES_LIB_DIR=$(shell ocamlfind query ctypes)
+
+OCAMLBUILD=CTYPES_LIB_DIR=$(CTYPES_LIB_DIR) OCAML_LIB_DIR=$(OCAML_LIB_DIR) \
+	ocamlbuild -use-ocamlfind -classic-display
+
+TARGETS=.cma .cmxa
+
+PRODUCTS=$(addprefix $(MOD_NAME),$(TARGETS)) \
+	lib$(MOD_NAME)_stubs.a dll$(MOD_NAME)_stubs.so
+
+TYPES=.mli .cmi .cmti
+
+INSTALL=$(addprefix errno,$(TYPES)) \
+	$(addprefix errno_unix, $(TYPES)) \
+	$(addprefix $(MOD_NAME), $(TARGETS))
 
 build:
-	mkdir -p $(BUILD)
-	cc -c -o $(BUILD)/$(MOD_NAME)_stubs.o lib/$(MOD_NAME)_stubs.c -I$(shell ocamlc -where)
-	ocamlfind ocamlc -o $(BUILD)/$(MOD_NAME).cmi -c lib/$(MOD_NAME).mli
-	ocamlfind ocamlmklib -o $(BUILD)/$(MOD_NAME) -I $(BUILD) \
-		lib/$(MOD_NAME).ml $(BUILD)/$(MOD_NAME)_stubs.o
+	$(OCAMLBUILD) $(PRODUCTS)
 
 install:
 	ocamlfind install $(FINDLIB_NAME) META \
-		lib/$(MOD_NAME).mli \
-		$(BUILD)/$(MOD_NAME).cmi \
-		$(BUILD)/$(MOD_NAME).cma \
-		$(BUILD)/$(MOD_NAME).cmxa \
-		-dll $(BUILD)/dll$(MOD_NAME).so \
-		-nodll $(BUILD)/lib$(MOD_NAME).a $(BUILD)/$(MOD_NAME).a
+		$(addprefix _build/lib/,$(INSTALL)) \
+		-dll _build/lib/dll$(MOD_NAME)_stubs.so \
+		-nodll _build/lib/lib$(MOD_NAME)_stubs.a
 
 uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
@@ -27,4 +37,4 @@ reinstall: uninstall install
 
 clean:
 	rm -rf _build
-	rm -f lib/$(MOD_NAME).cm? lib/$(MOD_NAME).o
+	rm -f lib/errno.cm? lib/errno_unix.cm? lib/errno.o lib/errno_unix.o
