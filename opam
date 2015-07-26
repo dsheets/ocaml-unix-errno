@@ -1,0 +1,21 @@
+opam-version: "1.2"
+name: "unix-errno"
+version: "0.2.0"
+maintainer: "sheets@alum.mit.edu"
+authors: "David Sheets"
+homepage: "https://github.com/dsheets/ocaml-unix-errno"
+bug-reports: "https://github.com/dsheets/ocaml-unix-errno/issues"
+dev-repo: "https://github.com/dsheets/ocaml-unix-errno.git"
+license: "ISC"
+build: [
+  [make "build"]
+]
+install: [
+  [make "install"]
+]
+remove: [make "uninstall"]
+depends: [
+  "ocamlfind" {build}
+  "ctypes" {>= "0.4.0"}
+  "rresult"
+]
