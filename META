@@ -1,4 +1,4 @@
-version = "0.1"
+version = "0.1.0"
 description = "Host-dependent UNIX errno-integer maps"
 requires = "unix"
 archive(byte) = "unix_errno.cma"
