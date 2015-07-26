@@ -2,5 +2,11 @@ ocaml-unix-errno
 ================
 
 [ocaml-unix-errno](https://github.com/dsheets/ocaml-unix-errno) provides
-host-dependent errno-integer maps for protocols that use errnos as
-signalling elements.
+an errno variant similar to `Unix.error` but including POSIX 2008 and
+Linux-specific constructors. A macro definition type, `defns` is also
+provided in order to transport a specific errno-integer map as is the
+case with FUSE. The types and their functions reside in `Errno` and are
+independent of any Unix bindings. This makes the library's types usable
+from MirageOS on top of Xen. `Errno_unix` provides maps to and from
+`Unix.error`, the present host's errno map, an errno exception `Error`,
+and higher-order errno checking functions.
