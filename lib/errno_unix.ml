@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2014 David Sheets <sheets@alum.mit.edu>
+ * Copyright (c) 2014-2015 David Sheets <sheets@alum.mit.edu>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -210,6 +210,78 @@ let to_unix ~host = Errno.(function
   | EWOULDBLOCK -> Some Unix.EWOULDBLOCK
   | EXDEV -> Some Unix.EXDEV
   | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR x)
+)
+
+let of_unix ~host = Unix.(function
+  | E2BIG -> [Errno.E2BIG]
+  | EACCES -> [Errno.EACCES]
+  | EADDRINUSE -> [Errno.EADDRINUSE]
+  | EADDRNOTAVAIL -> [Errno.EADDRNOTAVAIL]
+  | EAFNOSUPPORT -> [Errno.EAFNOSUPPORT]
+  | EAGAIN -> [Errno.EAGAIN]
+  | EALREADY -> [Errno.EALREADY]
+  | EBADF -> [Errno.EBADF]
+  | EBUSY -> [Errno.EBUSY]
+  | ECHILD -> [Errno.ECHILD]
+  | ECONNABORTED -> [Errno.ECONNABORTED]
+  | ECONNREFUSED -> [Errno.ECONNREFUSED]
+  | ECONNRESET -> [Errno.ECONNRESET]
+  | EDEADLK -> [Errno.EDEADLK]
+  | EDESTADDRREQ -> [Errno.EDESTADDRREQ]
+  | EDOM -> [Errno.EDOM]
+  | EEXIST -> [Errno.EEXIST]
+  | EFAULT -> [Errno.EFAULT]
+  | EFBIG -> [Errno.EFBIG]
+  | EHOSTDOWN -> [Errno.EHOSTDOWN]
+  | EHOSTUNREACH -> [Errno.EHOSTUNREACH]
+  | EINPROGRESS -> [Errno.EINPROGRESS]
+  | EINTR -> [Errno.EINTR]
+  | EINVAL -> [Errno.EINVAL]
+  | EIO -> [Errno.EIO]
+  | EISCONN -> [Errno.EISCONN]
+  | EISDIR -> [Errno.EISDIR]
+  | ELOOP -> [Errno.ELOOP]
+  | EMFILE -> [Errno.EMFILE]
+  | EMLINK -> [Errno.EMLINK]
+  | EMSGSIZE -> [Errno.EMSGSIZE]
+  | ENAMETOOLONG -> [Errno.ENAMETOOLONG]
+  | ENETDOWN -> [Errno.ENETDOWN]
+  | ENETRESET -> [Errno.ENETRESET]
+  | ENETUNREACH -> [Errno.ENETUNREACH]
+  | ENFILE -> [Errno.ENFILE]
+  | ENOBUFS -> [Errno.ENOBUFS]
+  | ENODEV -> [Errno.ENODEV]
+  | ENOENT -> [Errno.ENOENT]
+  | ENOEXEC -> [Errno.ENOEXEC]
+  | ENOLCK -> [Errno.ENOLCK]
+  | ENOMEM -> [Errno.ENOMEM]
+  | ENOPROTOOPT -> [Errno.ENOPROTOOPT]
+  | ENOSPC -> [Errno.ENOSPC]
+  | ENOSYS -> [Errno.ENOSYS]
+  | ENOTCONN -> [Errno.ENOTCONN]
+  | ENOTDIR -> [Errno.ENOTDIR]
+  | ENOTEMPTY -> [Errno.ENOTEMPTY]
+  | ENOTSOCK -> [Errno.ENOTSOCK]
+  | ENOTTY -> [Errno.ENOTTY]
+  | ENXIO -> [Errno.ENXIO]
+  | EOPNOTSUPP -> [Errno.EOPNOTSUPP]
+  | EOVERFLOW -> [Errno.EOVERFLOW]
+  | EPERM -> [Errno.EPERM]
+  | EPFNOSUPPORT -> [Errno.EPFNOSUPPORT]
+  | EPIPE -> [Errno.EPIPE]
+  | EPROTONOSUPPORT -> [Errno.EPROTONOSUPPORT]
+  | EPROTOTYPE -> [Errno.EPROTOTYPE]
+  | ERANGE -> [Errno.ERANGE]
+  | EROFS -> [Errno.EROFS]
+  | ESHUTDOWN -> [Errno.ESHUTDOWN]
+  | ESOCKTNOSUPPORT -> [Errno.ESOCKTNOSUPPORT]
+  | ESPIPE -> [Errno.ESPIPE]
+  | ESRCH -> [Errno.ESRCH]
+  | ETIMEDOUT -> [Errno.ETIMEDOUT]
+  | ETOOMANYREFS -> [Errno.ETOOMANYREFS]
+  | EWOULDBLOCK -> [Errno.EWOULDBLOCK]
+  | EXDEV -> [Errno.EXDEV]
+  | EUNKNOWNERR x -> Errno.of_code ~host x
 )
 
 let raise_on_errno ?(call="") ?(label="") fn =

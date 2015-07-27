@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2014 David Sheets <sheets@alum.mit.edu>
+ * Copyright (c) 2014-2015 David Sheets <sheets@alum.mit.edu>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -26,6 +26,8 @@ exception Error of error
 val host : Errno.host
 
 val to_unix : host:Errno.host -> Errno.t -> Unix.error option
+
+val of_unix : host:Errno.host -> Unix.error -> Errno.t list
 
 val raise_on_errno : ?call:string -> ?label:string -> (unit -> 'a) -> 'a
 
