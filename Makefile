@@ -28,7 +28,8 @@ install:
 	ocamlfind install $(FINDLIB_NAME) META \
 		$(addprefix _build/lib/,$(INSTALL)) \
 		-dll _build/lib/dll$(MOD_NAME)_stubs.so \
-		-nodll _build/lib/lib$(MOD_NAME)_stubs.a
+		-nodll _build/lib/lib$(MOD_NAME)_stubs.a \
+		_build/lib/$(MOD_NAME).a
 
 uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
