@@ -104,6 +104,14 @@ type t =
   | EXDEV
   | EUNKNOWNERR of int
 
+type error = {
+  errno : t list;
+  call  : string;
+  label : string;
+}
+
+exception Error of error
+
 type defns = {
   e2big : int option;
   eacces : int option;
@@ -202,3 +210,5 @@ val of_code : host:host -> int -> t list
 val to_string : t -> string
 
 val host_of_defns : defns -> host
+
+val check_errno : (unit -> 'a) -> ('a, error) Rresult.result

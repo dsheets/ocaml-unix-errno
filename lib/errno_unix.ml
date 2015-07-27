@@ -15,14 +15,6 @@
  *
  *)
 
-type error = {
-  errno : Errno.t list;
-  call  : string;
-  label : string;
-}
-
-exception Error of error
-
 module Type = Unix_errno_types.C(Unix_errno_types_detected)
 module C = Unix_errno_bindings.C(Unix_errno_generated)
 
@@ -289,8 +281,11 @@ let raise_on_errno ?(call="") ?(label="") fn =
   let r = fn () in
   match C.get_errno () with
   | 0 -> r
-  | code -> raise (Error { errno = Errno.of_code ~host code; call; label; })
+  | code -> raise Errno.(Error { errno = of_code ~host code; call; label; })
 
-let check_errno fn =
-  try Rresult.Ok (fn ())
-  with Error e -> Rresult.Error e
+let with_unix_exn fn =
+  try fn ()
+  with Errno.Error { Errno.errno = err::_; call; label } as e ->
+    match to_unix ~host err with
+    | Some err -> raise (Unix.Unix_error (err,call,label))
+    | None -> raise e

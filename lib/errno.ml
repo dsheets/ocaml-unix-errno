@@ -104,6 +104,14 @@ type t =
   | EXDEV
   | EUNKNOWNERR of int
 
+type error = {
+  errno : t list;
+  call  : string;
+  label : string;
+}
+
+exception Error of error
+
 type defns = {
   e2big : int option;
   eacces : int option;
@@ -559,3 +567,7 @@ let index_of_defns defns =
   h
 
 let host_of_defns defns = (defns, index_of_defns defns)
+
+let check_errno fn =
+  try Rresult.Ok (fn ())
+  with Error e -> Rresult.Error e
