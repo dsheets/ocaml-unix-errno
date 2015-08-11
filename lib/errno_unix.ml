@@ -64,7 +64,6 @@ let host =
     enetunreach = option enetunreach;
     enfile = option enfile;
     enobufs = option enobufs;
-    enodata = option enodata;
     enodev = option enodev;
     enoent = option enoent;
     enoexec = option enoexec;
@@ -74,8 +73,6 @@ let host =
     enomsg = option enomsg;
     enoprotoopt = option enoprotoopt;
     enospc = option enospc;
-    enosr = option enosr;
-    enostr = option enostr;
     enosys = option enosys;
     enotconn = option enotconn;
     enotdir = option enotdir;
@@ -101,7 +98,6 @@ let host =
     espipe = option espipe;
     esrch = option esrch;
     estale = option estale;
-    etime = option etime;
     etimedout = option etimedout;
     etoomanyrefs = option etoomanyrefs;
     etxtbsy = option etxtbsy;
@@ -158,7 +154,6 @@ let to_unix ~host = Errno.(function
   | ENETUNREACH -> Some Unix.ENETUNREACH
   | ENFILE -> Some Unix.ENFILE
   | ENOBUFS -> Some Unix.ENOBUFS
-  | ENODATA -> optional_unknown ~host ENODATA
   | ENODEV -> Some Unix.ENODEV
   | ENOENT -> Some Unix.ENOENT
   | ENOEXEC -> Some Unix.ENOEXEC
@@ -168,8 +163,6 @@ let to_unix ~host = Errno.(function
   | ENOMSG -> optional_unknown ~host ENOMSG
   | ENOPROTOOPT -> Some Unix.ENOPROTOOPT
   | ENOSPC -> Some Unix.ENOSPC
-  | ENOSR -> optional_unknown ~host ENOSR
-  | ENOSTR -> optional_unknown ~host ENOSTR
   | ENOSYS -> Some Unix.ENOSYS
   | ENOTCONN -> Some Unix.ENOTCONN
   | ENOTDIR -> Some Unix.ENOTDIR
@@ -195,7 +188,6 @@ let to_unix ~host = Errno.(function
   | ESPIPE -> Some Unix.ESPIPE
   | ESRCH -> Some Unix.ESRCH
   | ESTALE -> optional_unknown ~host ESTALE
-  | ETIME -> optional_unknown ~host ETIME
   | ETIMEDOUT -> Some Unix.ETIMEDOUT
   | ETOOMANYREFS -> Some Unix.ETOOMANYREFS
   | ETXTBSY -> optional_unknown ~host ETXTBSY

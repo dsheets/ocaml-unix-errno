@@ -59,7 +59,6 @@ type t =
   | ENETUNREACH
   | ENFILE
   | ENOBUFS
-  | ENODATA
   | ENODEV
   | ENOENT
   | ENOEXEC
@@ -69,8 +68,6 @@ type t =
   | ENOMSG
   | ENOPROTOOPT
   | ENOSPC
-  | ENOSR
-  | ENOSTR
   | ENOSYS
   | ENOTCONN
   | ENOTDIR
@@ -96,7 +93,6 @@ type t =
   | ESPIPE
   | ESRCH
   | ESTALE
-  | ETIME
   | ETIMEDOUT
   | ETOOMANYREFS
   | ETXTBSY
@@ -156,7 +152,6 @@ type defns = {
   enetunreach : int option;
   enfile : int option;
   enobufs : int option;
-  enodata : int option;
   enodev : int option;
   enoent : int option;
   enoexec : int option;
@@ -166,8 +161,6 @@ type defns = {
   enomsg : int option;
   enoprotoopt : int option;
   enospc : int option;
-  enosr : int option;
-  enostr : int option;
   enosys : int option;
   enotconn : int option;
   enotdir : int option;
@@ -193,7 +186,6 @@ type defns = {
   espipe : int option;
   esrch : int option;
   estale : int option;
-  etime : int option;
   etimedout : int option;
   etoomanyrefs : int option;
   etxtbsy : int option;

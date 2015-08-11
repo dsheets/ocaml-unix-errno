@@ -59,7 +59,6 @@ type t =
   | ENETUNREACH
   | ENFILE
   | ENOBUFS
-  | ENODATA
   | ENODEV
   | ENOENT
   | ENOEXEC
@@ -69,8 +68,6 @@ type t =
   | ENOMSG
   | ENOPROTOOPT
   | ENOSPC
-  | ENOSR
-  | ENOSTR
   | ENOSYS
   | ENOTCONN
   | ENOTDIR
@@ -96,7 +93,6 @@ type t =
   | ESPIPE
   | ESRCH
   | ESTALE
-  | ETIME
   | ETIMEDOUT
   | ETOOMANYREFS (* Linux: Too many references: cannot splice *)
   | ETXTBSY
@@ -156,7 +152,6 @@ type defns = {
   enetunreach : int option;
   enfile : int option;
   enobufs : int option;
-  enodata : int option;
   enodev : int option;
   enoent : int option;
   enoexec : int option;
@@ -166,8 +161,6 @@ type defns = {
   enomsg : int option;
   enoprotoopt : int option;
   enospc : int option;
-  enosr : int option;
-  enostr : int option;
   enosys : int option;
   enotconn : int option;
   enotdir : int option;
@@ -193,7 +186,6 @@ type defns = {
   espipe : int option;
   esrch : int option;
   estale : int option;
-  etime : int option;
   etimedout : int option;
   etoomanyrefs : int option;
   etxtbsy : int option;
@@ -248,7 +240,6 @@ let to_code ~host = let (defns,_) = host in function
   | ENETUNREACH -> defns.enetunreach
   | ENFILE -> defns.enfile
   | ENOBUFS -> defns.enobufs
-  | ENODATA -> defns.enodata
   | ENODEV -> defns.enodev
   | ENOENT -> defns.enoent
   | ENOEXEC -> defns.enoexec
@@ -258,8 +249,6 @@ let to_code ~host = let (defns,_) = host in function
   | ENOMSG -> defns.enomsg
   | ENOPROTOOPT -> defns.enoprotoopt
   | ENOSPC -> defns.enospc
-  | ENOSR -> defns.enosr
-  | ENOSTR -> defns.enostr
   | ENOSYS -> defns.enosys
   | ENOTCONN -> defns.enotconn
   | ENOTDIR -> defns.enotdir
@@ -285,7 +274,6 @@ let to_code ~host = let (defns,_) = host in function
   | ESPIPE -> defns.espipe
   | ESRCH -> defns.esrch
   | ESTALE -> defns.estale
-  | ETIME -> defns.etime
   | ETIMEDOUT -> defns.etimedout
   | ETOOMANYREFS -> defns.etoomanyrefs
   | ETXTBSY -> defns.etxtbsy
@@ -342,7 +330,6 @@ let to_string = function
   | ENETUNREACH -> "ENETUNREACH"
   | ENFILE -> "ENFILE"
   | ENOBUFS -> "ENOBUFS"
-  | ENODATA -> "ENODATA"
   | ENODEV -> "ENODEV"
   | ENOENT -> "ENOENT"
   | ENOEXEC -> "ENOEXEC"
@@ -352,8 +339,6 @@ let to_string = function
   | ENOMSG -> "ENOMSG"
   | ENOPROTOOPT -> "ENOPROTOOPT"
   | ENOSPC -> "ENOSPC"
-  | ENOSR -> "ENOSR"
-  | ENOSTR -> "ENOSTR"
   | ENOSYS -> "ENOSYS"
   | ENOTCONN -> "ENOTCONN"
   | ENOTDIR -> "ENOTDIR"
@@ -379,7 +364,6 @@ let to_string = function
   | ESPIPE -> "ESPIPE"
   | ESRCH -> "ESRCH"
   | ESTALE -> "ESTALE"
-  | ETIME -> "ETIME"
   | ETIMEDOUT -> "ETIMEDOUT"
   | ETOOMANYREFS -> "ETOOMANYREFS"
   | ETXTBSY -> "ETXTBSY"
@@ -478,8 +462,6 @@ let index_of_defns defns =
    | Some x -> add h x ENFILE | None -> ());
   (match defns.enobufs with
    | Some x -> add h x ENOBUFS | None -> ());
-  (match defns.enodata with
-   | Some x -> add h x ENODATA | None -> ());
   (match defns.enodev with
    | Some x -> add h x ENODEV | None -> ());
   (match defns.enoent with
@@ -498,10 +480,6 @@ let index_of_defns defns =
    | Some x -> add h x ENOPROTOOPT | None -> ());
   (match defns.enospc with
    | Some x -> add h x ENOSPC | None -> ());
-  (match defns.enosr with
-   | Some x -> add h x ENOSR | None -> ());
-  (match defns.enostr with
-   | Some x -> add h x ENOSTR | None -> ());
   (match defns.enosys with
    | Some x -> add h x ENOSYS | None -> ());
   (match defns.enotconn with
@@ -552,8 +530,6 @@ let index_of_defns defns =
    | Some x -> add h x ESRCH | None -> ());
   (match defns.estale with
    | Some x -> add h x ESTALE | None -> ());
-  (match defns.etime with
-   | Some x -> add h x ETIME | None -> ());
   (match defns.etimedout with
    | Some x -> add h x ETIMEDOUT | None -> ());
   (match defns.etoomanyrefs with
