@@ -21,7 +21,7 @@ depends: [
   "result"
 ]
 depopts: [
-  "unix"
+  "base-unix"
   "ctypes"
 ]
 conflicts: [
