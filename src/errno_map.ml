@@ -15,4 +15,4 @@
  *
  *)
 
-Printf.printf "%s" Errno.(string_of_defns (defns_of_host Errno_unix.host))
+Printf.printf "%s" Errno.(string_of_defns (Host.to_defns Errno_unix.host))

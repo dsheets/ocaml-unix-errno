@@ -1,8 +1,10 @@
 0.3.0 (2015-11-30):
 * Use result instead of rresult
 * Split findlib package into errno and errno.unix (depopt ctypes+unix)
-* Add Errno.{defns_of_host, string_of_defns, defns_of_string}
+* Add Errno.{Host.to_defns, string_of_defns, defns_of_string}
 * Add errno-map executable to print the errno map of the current host
+* Move Errno.host_of_defns to Errno.Host.of_defns and Errno.host to Errno.Host.t
+* Add Errno.iter_defns
 
 0.2.0 (2015-07-26):
 * Use ctypes >= 0.4.0 with stub generation

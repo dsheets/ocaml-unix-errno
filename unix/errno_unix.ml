@@ -104,7 +104,7 @@ let host =
     ewouldblock = option ewouldblock;
     exdev = option exdev;
   })) in
-  Errno.host_of_defns defns
+  Errno.Host.of_defns defns
 
 let optional_unknown ~host errno = match Errno.to_code ~host errno with
   | Some i -> Some (Unix.EUNKNOWNERR i)

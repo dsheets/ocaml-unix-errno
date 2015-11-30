@@ -15,11 +15,11 @@
  *
  *)
 
-val host : Errno.host
+val host : Errno.Host.t
 
-val to_unix : host:Errno.host -> Errno.t -> Unix.error option
+val to_unix : host:Errno.Host.t -> Errno.t -> Unix.error option
 
-val of_unix : host:Errno.host -> Unix.error -> Errno.t list
+val of_unix : host:Errno.Host.t -> Unix.error -> Errno.t list
 
 val raise_on_errno : ?call:string -> ?label:string -> (unit -> 'a) -> 'a
 

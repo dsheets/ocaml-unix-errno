@@ -194,7 +194,6 @@ type defns = {
 }
 
 type index = (int, t) Hashtbl.t
-type host = defns * index
 
 let empty_defns = {
   e2big = None;
@@ -792,14 +791,19 @@ let iter_defns defns f_exist f_missing =
   (match defns.exdev with
    | Some x -> f_exist x EXDEV | None -> f_missing EXDEV)
 
-let index_of_defns defns =
-  let h = Hashtbl.create 100 in
-  iter_defns defns (Hashtbl.add h) (fun _ -> ());
-  h
+module Host = struct
+  type t = defns * index
 
-let host_of_defns defns = (defns, index_of_defns defns)
+  let index_of_defns defns =
+    let h = Hashtbl.create 100 in
+    iter_defns defns (Hashtbl.add h) (fun _ -> ());
+    h
 
-let defns_of_host (defns, _) = defns
+  let of_defns defns = (defns, index_of_defns defns)
+
+  let to_defns (defns, _) = defns
+
+end
 
 let string_of_defns defns =
   let buf = Buffer.create 1024 in

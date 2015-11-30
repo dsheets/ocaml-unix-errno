@@ -193,17 +193,22 @@ type defns = {
   exdev : int option;
 }
 
-type host
+module Host : sig
+  type t
 
-val to_code : host:host -> t -> int option
+  val of_defns : defns -> t
 
-val of_code : host:host -> int -> t list
+  val to_defns : t -> defns
+
+end
+
+val to_code : host:Host.t -> t -> int option
+
+val of_code : host:Host.t -> int -> t list
 
 val to_string : t -> string
 
-val host_of_defns : defns -> host
-
-val defns_of_host : host -> defns
+val iter_defns : defns -> (int -> t -> unit) -> (t -> unit) -> unit
 
 val string_of_defns : defns -> string
 
