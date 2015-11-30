@@ -18,7 +18,8 @@ PRODUCTS=$(addprefix errno,$(TARGETS))
 
 ifeq ($(WITH_CTYPES), 0)
 PRODUCTS+=$(addprefix $(MOD_NAME),$(TARGETS)) \
-          lib$(MOD_NAME)_stubs.a dll$(MOD_NAME)_stubs.so
+          lib$(MOD_NAME)_stubs.a dll$(MOD_NAME)_stubs.so \
+          errno_map.byte
 endif
 
 TYPES=.mli .cmi .cmti
