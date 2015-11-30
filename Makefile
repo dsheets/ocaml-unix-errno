@@ -42,7 +42,9 @@ endif
 ARCHIVES:=_build/lib/errno.a
 
 ifeq ($(WITH_CTYPES), 0)
-ARCHIVES+=_build/unix/$(MOD_NAME).a
+ARCHIVES+=-dll _build/unix/dll$(MOD_NAME)_stubs.so \
+          -nodll _build/unix/lib$(MOD_NAME)_stubs.a \
+          _build/unix/$(MOD_NAME).a
 endif
 
 build:
@@ -53,11 +55,7 @@ test: build
 	./test.native
 
 install:
-	ocamlfind install $(FINDLIB_NAME) META \
-		$(INSTALL) \
-		-dll _build/unix/dll$(MOD_NAME)_stubs.so \
-		-nodll _build/unix/lib$(MOD_NAME)_stubs.a \
-		$(ARCHIVES)
+	ocamlfind install $(FINDLIB_NAME) META $(INSTALL) $(ARCHIVES)
 
 uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
