@@ -1,4 +1,4 @@
-.PHONY: build install uninstall reinstall clean
+.PHONY: build test install uninstall reinstall clean
 
 FINDLIB_NAME=unix-errno
 MOD_NAME=unix_errno
@@ -10,26 +10,52 @@ CTYPES_LIB_DIR=$(shell ocamlfind query ctypes)
 OCAMLBUILD=CTYPES_LIB_DIR=$(CTYPES_LIB_DIR) OCAML_LIB_DIR=$(OCAML_LIB_DIR) \
 	ocamlbuild -use-ocamlfind -classic-display
 
+WITH_CTYPES=$(shell ocamlfind query ctypes unix > /dev/null 2>&1 ; echo $$?)
+
 TARGETS=.cma .cmxa
 
-PRODUCTS=$(addprefix $(MOD_NAME),$(TARGETS)) \
-	lib$(MOD_NAME)_stubs.a dll$(MOD_NAME)_stubs.so
+PRODUCTS=$(addprefix errno,$(TARGETS))
+
+ifeq ($(WITH_CTYPES), 0)
+PRODUCTS+=$(addprefix $(MOD_NAME),$(TARGETS)) \
+          lib$(MOD_NAME)_stubs.a dll$(MOD_NAME)_stubs.so
+endif
 
 TYPES=.mli .cmi .cmti
 
-INSTALL=$(addprefix errno,$(TYPES)) \
-	$(addprefix errno_unix, $(TYPES)) \
-	$(addprefix $(MOD_NAME), $(TARGETS))
+INSTALL:=$(addprefix errno,$(TYPES)) \
+         $(addprefix errno,$(TARGETS))
+
+INSTALL:=$(addprefix _build/lib/,$(INSTALL))
+
+ifeq ($(WITH_CTYPES), 0)
+INSTALL_CTYPES:=$(addprefix errno_unix,$(TYPES)) \
+                $(addprefix $(MOD_NAME),$(TARGETS))
+
+INSTALL_CTYPES:=$(addprefix _build/unix/,$(INSTALL_CTYPES))
+
+INSTALL+=$(INSTALL_CTYPES)
+endif
+
+ARCHIVES:=_build/lib/errno.a
+
+ifeq ($(WITH_CTYPES), 0)
+ARCHIVES+=_build/unix/$(MOD_NAME).a
+endif
 
 build:
 	$(OCAMLBUILD) $(PRODUCTS)
 
+test: build
+	$(OCAMLBUILD) unix_test/test.native
+	./test.native
+
 install:
 	ocamlfind install $(FINDLIB_NAME) META \
-		$(addprefix _build/lib/,$(INSTALL)) \
-		-dll _build/lib/dll$(MOD_NAME)_stubs.so \
-		-nodll _build/lib/lib$(MOD_NAME)_stubs.a \
-		_build/lib/$(MOD_NAME).a
+		$(INSTALL) \
+		-dll _build/unix/dll$(MOD_NAME)_stubs.so \
+		-nodll _build/unix/lib$(MOD_NAME)_stubs.a \
+		$(ARCHIVES)
 
 uninstall:
 	ocamlfind remove $(FINDLIB_NAME)
@@ -37,5 +63,5 @@ uninstall:
 reinstall: uninstall install
 
 clean:
-	rm -rf _build
-	rm -f lib/errno.cm? lib/errno_unix.cm? lib/errno.o lib/errno_unix.o
+	ocamlbuild -clean
+	rm -f lib/errno.cm? unix/errno_unix.cm? lib/errno.o unix/errno_unix.o

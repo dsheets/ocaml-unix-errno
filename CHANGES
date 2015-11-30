@@ -1,5 +1,6 @@
 0.3.0 (2015-11-30):
 * Use result instead of rresult
+* Split findlib package into errno and errno.unix (depopt ctypes+unix)
 
 0.2.0 (2015-07-26):
 * Use ctypes >= 0.4.0 with stub generation

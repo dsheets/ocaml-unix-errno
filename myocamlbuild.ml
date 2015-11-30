@@ -20,13 +20,13 @@ dispatch begin
                 A(env "lib_gen/%_types_detect.c");
                ]));
 
-    rule "cstubs: lib_gen/x_types_detect -> lib/x_types_detected.ml"
-      ~prods:["lib/%_types_detected.ml"]
+    rule "cstubs: lib_gen/x_types_detect -> unix/x_types_detected.ml"
+      ~prods:["unix/%_types_detected.ml"]
       ~deps:["lib_gen/%_types_detect"]
       (fun env build ->
          Cmd (S[A(env "lib_gen/%_types_detect");
                 Sh">";
-                A(env "lib/%_types_detected.ml");
+                A(env "unix/%_types_detected.ml");
                ]));
 
     rule "cstubs: lib_gen/x_types.ml -> x_types_detect.c"
@@ -35,17 +35,17 @@ dispatch begin
       (fun env build ->
          Cmd (A(env "lib_gen/%_typegen.byte")));
 
-    copy_rule "cstubs: lib_gen/x_types.ml -> lib/x_types.ml"
-      "lib_gen/%_types.ml" "lib/%_types.ml";
+    copy_rule "cstubs: lib_gen/x_types.ml -> unix/x_types.ml"
+      "lib_gen/%_types.ml" "unix/%_types.ml";
 
-    rule "cstubs: lib/x_bindings.ml -> x_stubs.c, x_generated.ml"
-      ~prods:["lib/%_stubs.c"; "lib/%_generated.ml"]
+    rule "cstubs: unix/x_bindings.ml -> x_stubs.c, x_generated.ml"
+      ~prods:["unix/%_stubs.c"; "unix/%_generated.ml"]
       ~deps: ["lib_gen/%_bindgen.byte"]
       (fun env build ->
         Cmd (A(env "lib_gen/%_bindgen.byte")));
 
-    copy_rule "cstubs: lib_gen/x_bindings.ml -> lib/x_bindings.ml"
-      "lib_gen/%_bindings.ml" "lib/%_bindings.ml";
+    copy_rule "cstubs: lib_gen/x_bindings.ml -> unix/x_bindings.ml"
+      "lib_gen/%_bindings.ml" "unix/%_bindings.ml";
 
     flag ["c"; "compile"] & S[A"-ccopt"; A"-I/usr/local/include"];
     flag ["c"; "ocamlmklib"] & A"-L/usr/local/lib";
@@ -54,18 +54,18 @@ dispatch begin
 
     (* Linking cstubs *)
     dep ["c"; "compile"; "use_errno_util"]
-      ["lib/unix_errno_util.o"; "lib/unix_errno_util.h"];
+      ["unix/unix_errno_util.o"; "unix/unix_errno_util.h"];
     flag ["c"; "compile"; "use_ctypes"] & S[A"-I"; A ctypes_libdir];
     flag ["c"; "compile"; "debug"] & A"-g";
 
     (* Linking generated stubs *)
     dep ["ocaml"; "link"; "byte"; "library"; "use_errno_stubs"]
-      ["lib/dllunix_errno_stubs"-.-(!Options.ext_dll)];
+      ["unix/dllunix_errno_stubs"-.-(!Options.ext_dll)];
     flag ["ocaml"; "link"; "byte"; "library"; "use_errno_stubs"] &
       S[A"-dllib"; A"-lunix_errno_stubs"];
 
     dep ["ocaml"; "link"; "native"; "library"; "use_errno_stubs"]
-      ["lib/libunix_errno_stubs"-.-(!Options.ext_lib)];
+      ["unix/libunix_errno_stubs"-.-(!Options.ext_lib)];
     flag ["ocaml"; "link"; "native"; "library"; "use_errno_stubs"] &
       S[A"-cclib"; A"-lunix_errno_stubs"];
 
@@ -73,7 +73,7 @@ dispatch begin
     flag ["ocaml"; "link"; "byte"; "program"; "use_errno_stubs"] &
       S[A"-dllib"; A"-lunix_errno_stubs"];
     dep ["ocaml"; "link"; "native"; "program"; "use_errno_stubs"]
-      ["lib/libunix_errno_stubs"-.-(!Options.ext_lib)];
+      ["unix/libunix_errno_stubs"-.-(!Options.ext_lib)];
 
   | _ -> ()
 end;;

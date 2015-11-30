@@ -3,5 +3,7 @@ PKG result
 
 S lib
 S lib_gen
+S unix
+S unix_test
 
 B _build/**
