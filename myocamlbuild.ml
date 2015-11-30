@@ -49,6 +49,7 @@ dispatch begin
       ~deps: ["src/errno_srcgen.byte"; "maps/%"]
       (fun env build ->
          Cmd (S[A"src/errno_srcgen.byte";
+                Sh"<";
                 A(env "maps/%");
                 Sh">";
                 A(env "lib/errno_map_%.ml");

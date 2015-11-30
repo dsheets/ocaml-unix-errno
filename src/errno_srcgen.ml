@@ -15,12 +15,10 @@
  *
  *)
 
-let file = Sys.argv.(1)
-let ic = open_in file
 let buf = Buffer.create 1024
 
 let () = try while true do
-      let line = input_line ic in
+      let line = input_line stdin in
       Buffer.add_string buf line;
       Buffer.add_char buf '\n';
     done with End_of_file -> ()
