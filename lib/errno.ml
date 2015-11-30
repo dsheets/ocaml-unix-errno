@@ -545,5 +545,5 @@ let index_of_defns defns =
 let host_of_defns defns = (defns, index_of_defns defns)
 
 let check_errno fn =
-  try Rresult.Ok (fn ())
-  with Error e -> Rresult.Error e
+  try Result.Ok (fn ())
+  with Error e -> Result.Error e

@@ -203,4 +203,4 @@ val to_string : t -> string
 
 val host_of_defns : defns -> host
 
-val check_errno : (unit -> 'a) -> ('a, error) Rresult.result
+val check_errno : (unit -> 'a) -> ('a, error) Result.result
