@@ -18,7 +18,7 @@
 module ErrnoMap = struct
 
   let roundtrip () =
-    let defns = Errno.defns_of_host Errno_unix.host in
+    let defns = Errno.Host.to_defns Errno_unix.host in
     print_endline "after defns_of_host";
     let s = Errno.string_of_defns defns in
     print_endline "after string_of_defns";
