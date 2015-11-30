@@ -17,7 +17,7 @@ remove: [make "uninstall"]
 depends: [
   "ocamlfind" {build}
   "alcotest" {test}
-  "bytes"
+  "base-bytes"
   "result"
 ]
 depopts: [
