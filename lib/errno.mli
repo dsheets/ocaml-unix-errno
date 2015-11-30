@@ -203,4 +203,10 @@ val to_string : t -> string
 
 val host_of_defns : defns -> host
 
+val defns_of_host : host -> defns
+
+val string_of_defns : defns -> string
+
+val defns_of_string : string -> defns
+
 val check_errno : (unit -> 'a) -> ('a, error) Result.result

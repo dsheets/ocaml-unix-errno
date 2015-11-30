@@ -1,0 +1,1 @@
+<*.*>: package(alcotest), package(ctypes.stubs), use_errno_stubs

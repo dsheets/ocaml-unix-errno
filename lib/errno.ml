@@ -196,6 +196,91 @@ type defns = {
 type index = (int, t) Hashtbl.t
 type host = defns * index
 
+let empty_defns = {
+  e2big = None;
+  eacces = None;
+  eaddrinuse = None;
+  eaddrnotavail = None;
+  eafnosupport = None;
+  eagain = None;
+  ealready = None;
+  ebadf = None;
+  ebadmsg = None;
+  ebusy = None;
+  ecanceled = None;
+  echild = None;
+  econnaborted = None;
+  econnrefused = None;
+  econnreset = None;
+  edeadlk = None;
+  edestaddrreq = None;
+  edom = None;
+  edquot = None;
+  eexist = None;
+  efault = None;
+  efbig = None;
+  ehostdown = None;
+  ehostunreach = None;
+  eidrm = None;
+  eilseq = None;
+  einprogress = None;
+  eintr = None;
+  einval = None;
+  eio = None;
+  eisconn = None;
+  eisdir = None;
+  eloop = None;
+  emfile = None;
+  emlink = None;
+  emsgsize = None;
+  emultihop = None;
+  enametoolong = None;
+  enetdown = None;
+  enetreset = None;
+  enetunreach = None;
+  enfile = None;
+  enobufs = None;
+  enodev = None;
+  enoent = None;
+  enoexec = None;
+  enolck = None;
+  enolink = None;
+  enomem = None;
+  enomsg = None;
+  enoprotoopt = None;
+  enospc = None;
+  enosys = None;
+  enotconn = None;
+  enotdir = None;
+  enotempty = None;
+  enotrecoverable = None;
+  enotsock = None;
+  enotsup = None;
+  enotty = None;
+  enxio = None;
+  eopnotsupp = None;
+  eoverflow = None;
+  eownerdead = None;
+  eperm = None;
+  epfnosupport = None;
+  epipe = None;
+  eproto = None;
+  eprotonosupport = None;
+  eprototype = None;
+  erange = None;
+  erofs = None;
+  eshutdown = None;
+  esocktnosupport = None;
+  espipe = None;
+  esrch = None;
+  estale = None;
+  etimedout = None;
+  etoomanyrefs = None;
+  etxtbsy = None;
+  ewouldblock = None;
+  exdev = None;
+}
+
 let to_code ~host = let (defns,_) = host in function
   | E2BIG -> defns.e2big
   | EACCES -> defns.eacces
@@ -280,6 +365,91 @@ let to_code ~host = let (defns,_) = host in function
   | EWOULDBLOCK -> defns.ewouldblock
   | EXDEV -> defns.exdev
   | EUNKNOWNERR x   -> Some x
+
+let with_code defns symbol code = match symbol with
+  | E2BIG -> { defns with e2big = code }
+  | EACCES -> { defns with eacces = code }
+  | EADDRINUSE -> { defns with eaddrinuse = code }
+  | EADDRNOTAVAIL -> { defns with eaddrnotavail = code }
+  | EAFNOSUPPORT -> { defns with eafnosupport = code }
+  | EAGAIN -> { defns with eagain = code }
+  | EALREADY -> { defns with ealready = code }
+  | EBADF -> { defns with ebadf = code }
+  | EBADMSG -> { defns with ebadmsg = code }
+  | EBUSY -> { defns with ebusy = code }
+  | ECANCELED -> { defns with ecanceled = code }
+  | ECHILD -> { defns with echild = code }
+  | ECONNABORTED -> { defns with econnaborted = code }
+  | ECONNREFUSED -> { defns with econnrefused = code }
+  | ECONNRESET -> { defns with econnreset = code }
+  | EDEADLK -> { defns with edeadlk = code }
+  | EDESTADDRREQ -> { defns with edestaddrreq = code }
+  | EDOM -> { defns with edom = code }
+  | EDQUOT -> { defns with edquot = code }
+  | EEXIST -> { defns with eexist = code }
+  | EFAULT -> { defns with efault = code }
+  | EFBIG -> { defns with efbig = code }
+  | EHOSTDOWN -> { defns with ehostdown = code }
+  | EHOSTUNREACH -> { defns with ehostunreach = code }
+  | EIDRM -> { defns with eidrm = code }
+  | EILSEQ -> { defns with eilseq = code }
+  | EINPROGRESS -> { defns with einprogress = code }
+  | EINTR -> { defns with eintr = code }
+  | EINVAL -> { defns with einval = code }
+  | EIO -> { defns with eio = code }
+  | EISCONN -> { defns with eisconn = code }
+  | EISDIR -> { defns with eisdir = code }
+  | ELOOP -> { defns with eloop = code }
+  | EMFILE -> { defns with emfile = code }
+  | EMLINK -> { defns with emlink = code }
+  | EMSGSIZE -> { defns with emsgsize = code }
+  | EMULTIHOP -> { defns with emultihop = code }
+  | ENAMETOOLONG -> { defns with enametoolong = code }
+  | ENETDOWN -> { defns with enetdown = code }
+  | ENETRESET -> { defns with enetreset = code }
+  | ENETUNREACH -> { defns with enetunreach = code }
+  | ENFILE -> { defns with enfile = code }
+  | ENOBUFS -> { defns with enobufs = code }
+  | ENODEV -> { defns with enodev = code }
+  | ENOENT -> { defns with enoent = code }
+  | ENOEXEC -> { defns with enoexec = code }
+  | ENOLCK -> { defns with enolck = code }
+  | ENOLINK -> { defns with enolink = code }
+  | ENOMEM -> { defns with enomem = code }
+  | ENOMSG -> { defns with enomsg = code }
+  | ENOPROTOOPT -> { defns with enoprotoopt = code }
+  | ENOSPC -> { defns with enospc = code }
+  | ENOSYS -> { defns with enosys = code }
+  | ENOTCONN -> { defns with enotconn = code }
+  | ENOTDIR -> { defns with enotdir = code }
+  | ENOTEMPTY -> { defns with enotempty = code }
+  | ENOTRECOVERABLE -> { defns with enotrecoverable = code }
+  | ENOTSOCK -> { defns with enotsock = code }
+  | ENOTSUP -> { defns with enotsup = code }
+  | ENOTTY -> { defns with enotty = code }
+  | ENXIO -> { defns with enxio = code }
+  | EOPNOTSUPP -> { defns with eopnotsupp = code }
+  | EOVERFLOW -> { defns with eoverflow = code }
+  | EOWNERDEAD -> { defns with eownerdead = code }
+  | EPERM -> { defns with eperm = code }
+  | EPFNOSUPPORT -> { defns with epfnosupport = code }
+  | EPIPE -> { defns with epipe = code }
+  | EPROTO -> { defns with eproto = code }
+  | EPROTONOSUPPORT -> { defns with eprotonosupport = code }
+  | EPROTOTYPE -> { defns with eprototype = code }
+  | ERANGE -> { defns with erange = code }
+  | EROFS -> { defns with erofs = code }
+  | ESHUTDOWN -> { defns with eshutdown = code }
+  | ESOCKTNOSUPPORT -> { defns with esocktnosupport = code }
+  | ESPIPE -> { defns with espipe = code }
+  | ESRCH -> { defns with esrch = code }
+  | ESTALE -> { defns with estale = code }
+  | ETIMEDOUT -> { defns with etimedout = code }
+  | ETOOMANYREFS -> { defns with etoomanyrefs = code }
+  | ETXTBSY -> { defns with etxtbsy = code }
+  | EWOULDBLOCK -> { defns with ewouldblock = code }
+  | EXDEV -> { defns with exdev = code }
+  | EUNKNOWNERR _ -> defns
 
 let of_code ~host code =
   let (_,index) = host in
@@ -371,178 +541,293 @@ let to_string = function
   | EXDEV -> "EXDEV"
   | EUNKNOWNERR x   -> "EUNKNOWNERR_"^(string_of_int x)
 
-let index_of_defns defns =
-  let open Hashtbl in
-  let h = create 100 in
+let of_string = function
+  | "E2BIG" -> Some E2BIG
+  | "EACCES" -> Some EACCES
+  | "EADDRINUSE" -> Some EADDRINUSE
+  | "EADDRNOTAVAIL" -> Some EADDRNOTAVAIL
+  | "EAFNOSUPPORT" -> Some EAFNOSUPPORT
+  | "EAGAIN" -> Some EAGAIN
+  | "EALREADY" -> Some EALREADY
+  | "EBADF" -> Some EBADF
+  | "EBADMSG" -> Some EBADMSG
+  | "EBUSY" -> Some EBUSY
+  | "ECANCELED" -> Some ECANCELED
+  | "ECHILD" -> Some ECHILD
+  | "ECONNABORTED" -> Some ECONNABORTED
+  | "ECONNREFUSED" -> Some ECONNREFUSED
+  | "ECONNRESET" -> Some ECONNRESET
+  | "EDEADLK" -> Some EDEADLK
+  | "EDESTADDRREQ" -> Some EDESTADDRREQ
+  | "EDOM" -> Some EDOM
+  | "EDQUOT" -> Some EDQUOT
+  | "EEXIST" -> Some EEXIST
+  | "EFAULT" -> Some EFAULT
+  | "EFBIG" -> Some EFBIG
+  | "EHOSTDOWN" -> Some EHOSTDOWN
+  | "EHOSTUNREACH" -> Some EHOSTUNREACH
+  | "EIDRM" -> Some EIDRM
+  | "EILSEQ" -> Some EILSEQ
+  | "EINPROGRESS" -> Some EINPROGRESS
+  | "EINTR" -> Some EINTR
+  | "EINVAL" -> Some EINVAL
+  | "EIO" -> Some EIO
+  | "EISCONN" -> Some EISCONN
+  | "EISDIR" -> Some EISDIR
+  | "ELOOP" -> Some ELOOP
+  | "EMFILE" -> Some EMFILE
+  | "EMLINK" -> Some EMLINK
+  | "EMSGSIZE" -> Some EMSGSIZE
+  | "EMULTIHOP" -> Some EMULTIHOP
+  | "ENAMETOOLONG" -> Some ENAMETOOLONG
+  | "ENETDOWN" -> Some ENETDOWN
+  | "ENETRESET" -> Some ENETRESET
+  | "ENETUNREACH" -> Some ENETUNREACH
+  | "ENFILE" -> Some ENFILE
+  | "ENOBUFS" -> Some ENOBUFS
+  | "ENODEV" -> Some ENODEV
+  | "ENOENT" -> Some ENOENT
+  | "ENOEXEC" -> Some ENOEXEC
+  | "ENOLCK" -> Some ENOLCK
+  | "ENOLINK" -> Some ENOLINK
+  | "ENOMEM" -> Some ENOMEM
+  | "ENOMSG" -> Some ENOMSG
+  | "ENOPROTOOPT" -> Some ENOPROTOOPT
+  | "ENOSPC" -> Some ENOSPC
+  | "ENOSYS" -> Some ENOSYS
+  | "ENOTCONN" -> Some ENOTCONN
+  | "ENOTDIR" -> Some ENOTDIR
+  | "ENOTEMPTY" -> Some ENOTEMPTY
+  | "ENOTRECOVERABLE" -> Some ENOTRECOVERABLE
+  | "ENOTSOCK" -> Some ENOTSOCK
+  | "ENOTSUP" -> Some ENOTSUP
+  | "ENOTTY" -> Some ENOTTY
+  | "ENXIO" -> Some ENXIO
+  | "EOPNOTSUPP" -> Some EOPNOTSUPP
+  | "EOVERFLOW" -> Some EOVERFLOW
+  | "EOWNERDEAD" -> Some EOWNERDEAD
+  | "EPERM" -> Some EPERM
+  | "EPFNOSUPPORT" -> Some EPFNOSUPPORT
+  | "EPIPE" -> Some EPIPE
+  | "EPROTO" -> Some EPROTO
+  | "EPROTONOSUPPORT" -> Some EPROTONOSUPPORT
+  | "EPROTOTYPE" -> Some EPROTOTYPE
+  | "ERANGE" -> Some ERANGE
+  | "EROFS" -> Some EROFS
+  | "ESHUTDOWN" -> Some ESHUTDOWN
+  | "ESOCKTNOSUPPORT" -> Some ESOCKTNOSUPPORT
+  | "ESPIPE" -> Some ESPIPE
+  | "ESRCH" -> Some ESRCH
+  | "ESTALE" -> Some ESTALE
+  | "ETIMEDOUT" -> Some ETIMEDOUT
+  | "ETOOMANYREFS" -> Some ETOOMANYREFS
+  | "ETXTBSY" -> Some ETXTBSY
+  | "EWOULDBLOCK" -> Some EWOULDBLOCK
+  | "EXDEV" -> Some EXDEV
+  | _ -> None
+
+let iter_defns defns f_exist f_missing =
   (match defns.e2big with
-  | Some x -> add h x E2BIG | None -> ());
-  (match defns.e2big with
-   | Some x -> add h x E2BIG | None -> ());
+   | Some x -> f_exist x E2BIG | None -> f_missing E2BIG);
   (match defns.eacces with
-   | Some x -> add h x EACCES | None -> ());
+   | Some x -> f_exist x EACCES | None -> f_missing EACCES);
   (match defns.eaddrinuse with
-   | Some x -> add h x EADDRINUSE | None -> ());
+   | Some x -> f_exist x EADDRINUSE | None -> f_missing EADDRINUSE);
   (match defns.eaddrnotavail with
-   | Some x -> add h x EADDRNOTAVAIL | None -> ());
+   | Some x -> f_exist x EADDRNOTAVAIL | None -> f_missing EADDRNOTAVAIL);
   (match defns.eafnosupport with
-   | Some x -> add h x EAFNOSUPPORT | None -> ());
+   | Some x -> f_exist x EAFNOSUPPORT | None -> f_missing EAFNOSUPPORT);
   (match defns.eagain with
-   | Some x -> add h x EAGAIN | None -> ());
+   | Some x -> f_exist x EAGAIN | None -> f_missing EAGAIN);
   (match defns.ealready with
-   | Some x -> add h x EALREADY | None -> ());
+   | Some x -> f_exist x EALREADY | None -> f_missing EALREADY);
   (match defns.ebadf with
-   | Some x -> add h x EBADF | None -> ());
+   | Some x -> f_exist x EBADF | None -> f_missing EBADF);
   (match defns.ebadmsg with
-   | Some x -> add h x EBADMSG | None -> ());
+   | Some x -> f_exist x EBADMSG | None -> f_missing EBADMSG);
   (match defns.ebusy with
-   | Some x -> add h x EBUSY | None -> ());
+   | Some x -> f_exist x EBUSY | None -> f_missing EBUSY);
   (match defns.ecanceled with
-   | Some x -> add h x ECANCELED | None -> ());
+   | Some x -> f_exist x ECANCELED | None -> f_missing ECANCELED);
   (match defns.echild with
-   | Some x -> add h x ECHILD | None -> ());
+   | Some x -> f_exist x ECHILD | None -> f_missing ECHILD);
   (match defns.econnaborted with
-   | Some x -> add h x ECONNABORTED | None -> ());
+   | Some x -> f_exist x ECONNABORTED | None -> f_missing ECONNABORTED);
   (match defns.econnrefused with
-   | Some x -> add h x ECONNREFUSED | None -> ());
+   | Some x -> f_exist x ECONNREFUSED | None -> f_missing ECONNREFUSED);
   (match defns.econnreset with
-   | Some x -> add h x ECONNRESET | None -> ());
+   | Some x -> f_exist x ECONNRESET | None -> f_missing ECONNRESET);
   (match defns.edeadlk with
-   | Some x -> add h x EDEADLK | None -> ());
+   | Some x -> f_exist x EDEADLK | None -> f_missing EDEADLK);
   (match defns.edestaddrreq with
-   | Some x -> add h x EDESTADDRREQ | None -> ());
+   | Some x -> f_exist x EDESTADDRREQ | None -> f_missing EDESTADDRREQ);
   (match defns.edom with
-   | Some x -> add h x EDOM | None -> ());
+   | Some x -> f_exist x EDOM | None -> f_missing EDOM);
   (match defns.edquot with
-   | Some x -> add h x EDQUOT | None -> ());
+   | Some x -> f_exist x EDQUOT | None -> f_missing EDQUOT);
   (match defns.eexist with
-   | Some x -> add h x EEXIST | None -> ());
+   | Some x -> f_exist x EEXIST | None -> f_missing EEXIST);
   (match defns.efault with
-   | Some x -> add h x EFAULT | None -> ());
+   | Some x -> f_exist x EFAULT | None -> f_missing EFAULT);
   (match defns.efbig with
-   | Some x -> add h x EFBIG | None -> ());
+   | Some x -> f_exist x EFBIG | None -> f_missing EFBIG);
   (match defns.ehostdown with
-   | Some x -> add h x EHOSTDOWN | None -> ());
+   | Some x -> f_exist x EHOSTDOWN | None -> f_missing EHOSTDOWN);
   (match defns.ehostunreach with
-   | Some x -> add h x EHOSTUNREACH | None -> ());
+   | Some x -> f_exist x EHOSTUNREACH | None -> f_missing EHOSTUNREACH);
   (match defns.eidrm with
-   | Some x -> add h x EIDRM | None -> ());
+   | Some x -> f_exist x EIDRM | None -> f_missing EIDRM);
   (match defns.eilseq with
-   | Some x -> add h x EILSEQ | None -> ());
+   | Some x -> f_exist x EILSEQ | None -> f_missing EILSEQ);
   (match defns.einprogress with
-   | Some x -> add h x EINPROGRESS | None -> ());
+   | Some x -> f_exist x EINPROGRESS | None -> f_missing EINPROGRESS);
   (match defns.eintr with
-   | Some x -> add h x EINTR | None -> ());
+   | Some x -> f_exist x EINTR | None -> f_missing EINTR);
   (match defns.einval with
-   | Some x -> add h x EINVAL | None -> ());
+   | Some x -> f_exist x EINVAL | None -> f_missing EINVAL);
   (match defns.eio with
-   | Some x -> add h x EIO | None -> ());
+   | Some x -> f_exist x EIO | None -> f_missing EIO);
   (match defns.eisconn with
-   | Some x -> add h x EISCONN | None -> ());
+   | Some x -> f_exist x EISCONN | None -> f_missing EISCONN);
   (match defns.eisdir with
-   | Some x -> add h x EISDIR | None -> ());
+   | Some x -> f_exist x EISDIR | None -> f_missing EISDIR);
   (match defns.eloop with
-   | Some x -> add h x ELOOP | None -> ());
+   | Some x -> f_exist x ELOOP | None -> f_missing ELOOP);
   (match defns.emfile with
-   | Some x -> add h x EMFILE | None -> ());
+   | Some x -> f_exist x EMFILE | None -> f_missing EMFILE);
   (match defns.emlink with
-   | Some x -> add h x EMLINK | None -> ());
+   | Some x -> f_exist x EMLINK | None -> f_missing EMLINK);
   (match defns.emsgsize with
-   | Some x -> add h x EMSGSIZE | None -> ());
+   | Some x -> f_exist x EMSGSIZE | None -> f_missing EMSGSIZE);
   (match defns.emultihop with
-   | Some x -> add h x EMULTIHOP | None -> ());
+   | Some x -> f_exist x EMULTIHOP | None -> f_missing EMULTIHOP);
   (match defns.enametoolong with
-   | Some x -> add h x ENAMETOOLONG | None -> ());
+   | Some x -> f_exist x ENAMETOOLONG | None -> f_missing ENAMETOOLONG);
   (match defns.enetdown with
-   | Some x -> add h x ENETDOWN | None -> ());
+   | Some x -> f_exist x ENETDOWN | None -> f_missing ENETDOWN);
   (match defns.enetreset with
-   | Some x -> add h x ENETRESET | None -> ());
+   | Some x -> f_exist x ENETRESET | None -> f_missing ENETRESET);
   (match defns.enetunreach with
-   | Some x -> add h x ENETUNREACH | None -> ());
+   | Some x -> f_exist x ENETUNREACH | None -> f_missing ENETUNREACH);
   (match defns.enfile with
-   | Some x -> add h x ENFILE | None -> ());
+   | Some x -> f_exist x ENFILE | None -> f_missing ENFILE);
   (match defns.enobufs with
-   | Some x -> add h x ENOBUFS | None -> ());
+   | Some x -> f_exist x ENOBUFS | None -> f_missing ENOBUFS);
   (match defns.enodev with
-   | Some x -> add h x ENODEV | None -> ());
+   | Some x -> f_exist x ENODEV | None -> f_missing ENODEV);
   (match defns.enoent with
-   | Some x -> add h x ENOENT | None -> ());
+   | Some x -> f_exist x ENOENT | None -> f_missing ENOENT);
   (match defns.enoexec with
-   | Some x -> add h x ENOEXEC | None -> ());
+   | Some x -> f_exist x ENOEXEC | None -> f_missing ENOEXEC);
   (match defns.enolck with
-   | Some x -> add h x ENOLCK | None -> ());
+   | Some x -> f_exist x ENOLCK | None -> f_missing ENOLCK);
   (match defns.enolink with
-   | Some x -> add h x ENOLINK | None -> ());
+   | Some x -> f_exist x ENOLINK | None -> f_missing ENOLINK);
   (match defns.enomem with
-   | Some x -> add h x ENOMEM | None -> ());
+   | Some x -> f_exist x ENOMEM | None -> f_missing ENOMEM);
   (match defns.enomsg with
-   | Some x -> add h x ENOMSG | None -> ());
+   | Some x -> f_exist x ENOMSG | None -> f_missing ENOMSG);
   (match defns.enoprotoopt with
-   | Some x -> add h x ENOPROTOOPT | None -> ());
+   | Some x -> f_exist x ENOPROTOOPT | None -> f_missing ENOPROTOOPT);
   (match defns.enospc with
-   | Some x -> add h x ENOSPC | None -> ());
+   | Some x -> f_exist x ENOSPC | None -> f_missing ENOSPC);
   (match defns.enosys with
-   | Some x -> add h x ENOSYS | None -> ());
+   | Some x -> f_exist x ENOSYS | None -> f_missing ENOSYS);
   (match defns.enotconn with
-   | Some x -> add h x ENOTCONN | None -> ());
+   | Some x -> f_exist x ENOTCONN | None -> f_missing ENOTCONN);
   (match defns.enotdir with
-   | Some x -> add h x ENOTDIR | None -> ());
+   | Some x -> f_exist x ENOTDIR | None -> f_missing ENOTDIR);
   (match defns.enotempty with
-   | Some x -> add h x ENOTEMPTY | None -> ());
+   | Some x -> f_exist x ENOTEMPTY | None -> f_missing ENOTEMPTY);
   (match defns.enotrecoverable with
-   | Some x -> add h x ENOTRECOVERABLE | None -> ());
+   | Some x -> f_exist x ENOTRECOVERABLE | None -> f_missing ENOTRECOVERABLE);
   (match defns.enotsock with
-   | Some x -> add h x ENOTSOCK | None -> ());
+   | Some x -> f_exist x ENOTSOCK | None -> f_missing ENOTSOCK);
   (match defns.enotsup with
-   | Some x -> add h x ENOTSUP | None -> ());
+   | Some x -> f_exist x ENOTSUP | None -> f_missing ENOTSUP);
   (match defns.enotty with
-   | Some x -> add h x ENOTTY | None -> ());
+   | Some x -> f_exist x ENOTTY | None -> f_missing ENOTTY);
   (match defns.enxio with
-   | Some x -> add h x ENXIO | None -> ());
+   | Some x -> f_exist x ENXIO | None -> f_missing ENXIO);
   (match defns.eopnotsupp with
-   | Some x -> add h x EOPNOTSUPP | None -> ());
+   | Some x -> f_exist x EOPNOTSUPP | None -> f_missing EOPNOTSUPP);
   (match defns.eoverflow with
-   | Some x -> add h x EOVERFLOW | None -> ());
+   | Some x -> f_exist x EOVERFLOW | None -> f_missing EOVERFLOW);
   (match defns.eownerdead with
-   | Some x -> add h x EOWNERDEAD | None -> ());
+   | Some x -> f_exist x EOWNERDEAD | None -> f_missing EOWNERDEAD);
   (match defns.eperm with
-   | Some x -> add h x EPERM | None -> ());
+   | Some x -> f_exist x EPERM | None -> f_missing EPERM);
   (match defns.epfnosupport with
-   | Some x -> add h x EPFNOSUPPORT | None -> ());
+   | Some x -> f_exist x EPFNOSUPPORT | None -> f_missing EPFNOSUPPORT);
   (match defns.epipe with
-   | Some x -> add h x EPIPE | None -> ());
+   | Some x -> f_exist x EPIPE | None -> f_missing EPIPE);
   (match defns.eproto with
-   | Some x -> add h x EPROTO | None -> ());
+   | Some x -> f_exist x EPROTO | None -> f_missing EPROTO);
   (match defns.eprotonosupport with
-   | Some x -> add h x EPROTONOSUPPORT | None -> ());
+   | Some x -> f_exist x EPROTONOSUPPORT | None -> f_missing EPROTONOSUPPORT);
   (match defns.eprototype with
-   | Some x -> add h x EPROTOTYPE | None -> ());
+   | Some x -> f_exist x EPROTOTYPE | None -> f_missing EPROTOTYPE);
   (match defns.erange with
-   | Some x -> add h x ERANGE | None -> ());
+   | Some x -> f_exist x ERANGE | None -> f_missing ERANGE);
   (match defns.erofs with
-   | Some x -> add h x EROFS | None -> ());
+   | Some x -> f_exist x EROFS | None -> f_missing EROFS);
   (match defns.eshutdown with
-   | Some x -> add h x ESHUTDOWN | None -> ());
+   | Some x -> f_exist x ESHUTDOWN | None -> f_missing ESHUTDOWN);
   (match defns.esocktnosupport with
-   | Some x -> add h x ESOCKTNOSUPPORT | None -> ());
+   | Some x -> f_exist x ESOCKTNOSUPPORT | None -> f_missing ESOCKTNOSUPPORT);
   (match defns.espipe with
-   | Some x -> add h x ESPIPE | None -> ());
+   | Some x -> f_exist x ESPIPE | None -> f_missing ESPIPE);
   (match defns.esrch with
-   | Some x -> add h x ESRCH | None -> ());
+   | Some x -> f_exist x ESRCH | None -> f_missing ESRCH);
   (match defns.estale with
-   | Some x -> add h x ESTALE | None -> ());
+   | Some x -> f_exist x ESTALE | None -> f_missing ESTALE);
   (match defns.etimedout with
-   | Some x -> add h x ETIMEDOUT | None -> ());
+   | Some x -> f_exist x ETIMEDOUT | None -> f_missing ETIMEDOUT);
   (match defns.etoomanyrefs with
-   | Some x -> add h x ETOOMANYREFS | None -> ());
+   | Some x -> f_exist x ETOOMANYREFS | None -> f_missing ETOOMANYREFS);
   (match defns.etxtbsy with
-   | Some x -> add h x ETXTBSY | None -> ());
+   | Some x -> f_exist x ETXTBSY | None -> f_missing ETXTBSY);
   (match defns.ewouldblock with
-   | Some x -> add h x EWOULDBLOCK | None -> ());
+   | Some x -> f_exist x EWOULDBLOCK | None -> f_missing EWOULDBLOCK);
   (match defns.exdev with
-   | Some x -> add h x EXDEV | None -> ());
+   | Some x -> f_exist x EXDEV | None -> f_missing EXDEV)
+
+let index_of_defns defns =
+  let h = Hashtbl.create 100 in
+  iter_defns defns (Hashtbl.add h) (fun _ -> ());
   h
 
 let host_of_defns defns = (defns, index_of_defns defns)
+
+let defns_of_host (defns, _) = defns
+
+let string_of_defns defns =
+  let buf = Buffer.create 1024 in
+  iter_defns defns
+    (fun code symbol ->
+       Buffer.add_string buf (Printf.sprintf "%s\t%d\n" (to_string symbol) code)
+    )
+    (fun symbol ->
+       Buffer.add_string buf (Printf.sprintf "%s\t\n" (to_string symbol))
+    );
+  Buffer.contents buf
+
+let defns_of_string s =
+  let rec read_lines defns s =
+    try
+      let symbol, code, off = Scanf.sscanf s "%s\t%s\n" (fun symbol_s code_s ->
+        of_string symbol_s,
+        (if code_s = "" then None else Some (int_of_string code_s)),
+        String.(length symbol_s + 1 + length code_s + 1)
+      ) in
+      let defns = match symbol with
+        | Some symbol -> with_code defns symbol code
+        | None -> defns
+      in
+      read_lines defns String.(sub s off (length s - off))
+    with End_of_file -> defns
+  in
+  read_lines empty_defns s
 
 let check_errno fn =
   try Result.Ok (fn ())

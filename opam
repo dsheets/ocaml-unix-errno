@@ -16,6 +16,7 @@ install: [
 remove: [make "uninstall"]
 depends: [
   "ocamlfind" {build}
+  "alcotest" {test}
   "bytes"
   "result"
 ]
