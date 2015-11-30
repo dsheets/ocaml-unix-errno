@@ -25,6 +25,7 @@ endif
 TYPES=.mli .cmi .cmti
 
 INSTALL:=$(addprefix errno,$(TYPES)) \
+	 $(addprefix errno_host,$(TYPES)) \
          $(addprefix errno,$(TARGETS))
 
 INSTALL:=$(addprefix _build/lib/,$(INSTALL))

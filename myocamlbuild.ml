@@ -44,6 +44,16 @@ dispatch begin
       (fun env build ->
         Cmd (A(env "lib_gen/%_bindgen.byte")));
 
+    rule "errno_maps: maps/x -> lib/errno_map_x.ml"
+      ~prods:["lib/errno_map_%.ml"]
+      ~deps: ["src/errno_srcgen.byte"; "maps/%"]
+      (fun env build ->
+         Cmd (S[A"src/errno_srcgen.byte";
+                A(env "maps/%");
+                Sh">";
+                A(env "lib/errno_map_%.ml");
+               ]));
+
     copy_rule "cstubs: lib_gen/x_bindings.ml -> unix/x_bindings.ml"
       "lib_gen/%_bindings.ml" "unix/%_bindings.ml";
 

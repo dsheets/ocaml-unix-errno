@@ -3,8 +3,10 @@
 * Split findlib package into errno and errno.unix (depopt ctypes+unix)
 * Add Errno.{Host.to_defns, string_of_defns, defns_of_string}
 * Add errno-map executable to print the errno map of the current host
+* Add errno-srcgen executable to create source for an Errno.Host.t from a map
 * Move Errno.host_of_defns to Errno.Host.of_defns and Errno.host to Errno.Host.t
 * Add Errno.iter_defns
+* Add Errno_host module in errno findlib package with common Errno.Host.t values
 
 0.2.0 (2015-07-26):
 * Use ctypes >= 0.4.0 with stub generation
