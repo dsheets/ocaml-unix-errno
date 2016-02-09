@@ -836,3 +836,12 @@ let defns_of_string s =
 let check_errno fn =
   try Result.Ok (fn ())
   with Error e -> Result.Error e
+
+let string_of_error = function
+ | Error { errno; call; label } ->
+   Some (Printf.sprintf "{ errno = [%s]; call = %s; label = %s }"
+           (String.concat "; " (List.map to_string errno))
+           call label)
+ | _ -> None
+
+let () = Printexc.register_printer string_of_error
