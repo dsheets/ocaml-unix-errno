@@ -108,6 +108,8 @@ type error = {
 
 exception Error of error
 
+(** NB: This module registers a printer for the [Error] exception. *)
+
 type defns = {
   e2big : int option;
   eacces : int option;
@@ -215,3 +217,5 @@ val string_of_defns : defns -> string
 val defns_of_string : string -> defns
 
 val check_errno : (unit -> 'a) -> ('a, error) Result.result
+
+val string_of_error : error -> string
