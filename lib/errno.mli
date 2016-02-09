@@ -108,6 +108,8 @@ type error = {
 
 exception Error of error
 
+(** NB: This module registers a printer for the [Error] exception. *)
+
 type defns = {
   e2big : int option;
   eacces : int option;
