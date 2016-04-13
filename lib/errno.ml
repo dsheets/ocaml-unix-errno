@@ -452,8 +452,9 @@ let with_code defns symbol code = match symbol with
 
 let of_code ~host code =
   let (_,index) = host in
-  try Hashtbl.find_all index code
-  with Not_found -> [] (* [EUNKNOWNERR code] ? *)
+  match Hashtbl.find_all index code with
+  | [] -> [EUNKNOWNERR code]
+  | errnos -> errnos
 
 let to_string = function
   | E2BIG -> "E2BIG"
