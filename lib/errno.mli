@@ -69,6 +69,7 @@ type t =
   | ENOPROTOOPT
   | ENOSPC
   | ENOSYS
+  | ENOTBLK
   | ENOTCONN
   | ENOTDIR
   | ENOTEMPTY
@@ -87,6 +88,7 @@ type t =
   | EPROTONOSUPPORT
   | EPROTOTYPE
   | ERANGE
+  | EREMOTE
   | EROFS
   | ESHUTDOWN
   | ESOCKTNOSUPPORT
@@ -96,6 +98,7 @@ type t =
   | ETIMEDOUT
   | ETOOMANYREFS
   | ETXTBSY
+  | EUSERS
   | EWOULDBLOCK
   | EXDEV
   | EUNKNOWNERR of int
@@ -164,6 +167,7 @@ type defns = {
   enoprotoopt : int option;
   enospc : int option;
   enosys : int option;
+  enotblk : int option;
   enotconn : int option;
   enotdir : int option;
   enotempty : int option;
@@ -182,6 +186,7 @@ type defns = {
   eprotonosupport : int option;
   eprototype : int option;
   erange : int option;
+  eremote : int option;
   erofs : int option;
   eshutdown : int option;
   esocktnosupport : int option;
@@ -191,6 +196,7 @@ type defns = {
   etimedout : int option;
   etoomanyrefs : int option;
   etxtbsy : int option;
+  eusers : int option;
   ewouldblock : int option;
   exdev : int option;
 }

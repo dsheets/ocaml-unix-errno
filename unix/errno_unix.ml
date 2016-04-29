@@ -74,6 +74,7 @@ let host =
     enoprotoopt = option enoprotoopt;
     enospc = option enospc;
     enosys = option enosys;
+    enotblk = option enotblk;
     enotconn = option enotconn;
     enotdir = option enotdir;
     enotempty = option enotempty;
@@ -92,6 +93,7 @@ let host =
     eprotonosupport = option eprotonosupport;
     eprototype = option eprototype;
     erange = option erange;
+    eremote = option eremote;
     erofs = option erofs;
     eshutdown = option eshutdown;
     esocktnosupport = option esocktnosupport;
@@ -101,6 +103,7 @@ let host =
     etimedout = option etimedout;
     etoomanyrefs = option etoomanyrefs;
     etxtbsy = option etxtbsy;
+    eusers = option eusers;
     ewouldblock = option ewouldblock;
     exdev = option exdev;
   })) in
@@ -164,6 +167,7 @@ let to_unix ~host = Errno.(function
   | ENOPROTOOPT -> Some Unix.ENOPROTOOPT
   | ENOSPC -> Some Unix.ENOSPC
   | ENOSYS -> Some Unix.ENOSYS
+  | ENOTBLK -> optional_unknown ~host ENOTBLK
   | ENOTCONN -> Some Unix.ENOTCONN
   | ENOTDIR -> Some Unix.ENOTDIR
   | ENOTEMPTY -> Some Unix.ENOTEMPTY
@@ -182,6 +186,7 @@ let to_unix ~host = Errno.(function
   | EPROTONOSUPPORT -> Some Unix.EPROTONOSUPPORT
   | EPROTOTYPE -> Some Unix.EPROTOTYPE
   | ERANGE -> Some Unix.ERANGE
+  | EREMOTE -> optional_unknown ~host EREMOTE
   | EROFS -> Some Unix.EROFS
   | ESHUTDOWN -> Some Unix.ESHUTDOWN
   | ESOCKTNOSUPPORT -> Some Unix.ESOCKTNOSUPPORT
@@ -191,6 +196,7 @@ let to_unix ~host = Errno.(function
   | ETIMEDOUT -> Some Unix.ETIMEDOUT
   | ETOOMANYREFS -> Some Unix.ETOOMANYREFS
   | ETXTBSY -> optional_unknown ~host ETXTBSY
+  | EUSERS -> optional_unknown ~host EUSERS
   | EWOULDBLOCK -> Some Unix.EWOULDBLOCK
   | EXDEV -> Some Unix.EXDEV
   | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR x)

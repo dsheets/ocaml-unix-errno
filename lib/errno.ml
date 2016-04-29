@@ -69,6 +69,7 @@ type t =
   | ENOPROTOOPT
   | ENOSPC
   | ENOSYS
+  | ENOTBLK
   | ENOTCONN
   | ENOTDIR
   | ENOTEMPTY
@@ -87,6 +88,7 @@ type t =
   | EPROTONOSUPPORT
   | EPROTOTYPE
   | ERANGE
+  | EREMOTE
   | EROFS
   | ESHUTDOWN (* Linux: Cannot send after transport endpoint shutdown *)
   | ESOCKTNOSUPPORT (* Linux: Socket type not supported *)
@@ -96,6 +98,7 @@ type t =
   | ETIMEDOUT
   | ETOOMANYREFS (* Linux: Too many references: cannot splice *)
   | ETXTBSY
+  | EUSERS
   | EWOULDBLOCK
   | EXDEV
   | EUNKNOWNERR of int
@@ -162,6 +165,7 @@ type defns = {
   enoprotoopt : int option;
   enospc : int option;
   enosys : int option;
+  enotblk : int option;
   enotconn : int option;
   enotdir : int option;
   enotempty : int option;
@@ -180,6 +184,7 @@ type defns = {
   eprotonosupport : int option;
   eprototype : int option;
   erange : int option;
+  eremote : int option;
   erofs : int option;
   eshutdown : int option;
   esocktnosupport : int option;
@@ -189,6 +194,7 @@ type defns = {
   etimedout : int option;
   etoomanyrefs : int option;
   etxtbsy : int option;
+  eusers : int option;
   ewouldblock : int option;
   exdev : int option;
 }
@@ -249,6 +255,7 @@ let empty_defns = {
   enoprotoopt = None;
   enospc = None;
   enosys = None;
+  enotblk = None;
   enotconn = None;
   enotdir = None;
   enotempty = None;
@@ -267,6 +274,7 @@ let empty_defns = {
   eprotonosupport = None;
   eprototype = None;
   erange = None;
+  eremote = None;
   erofs = None;
   eshutdown = None;
   esocktnosupport = None;
@@ -276,6 +284,7 @@ let empty_defns = {
   etimedout = None;
   etoomanyrefs = None;
   etxtbsy = None;
+  eusers = None;
   ewouldblock = None;
   exdev = None;
 }
@@ -334,6 +343,7 @@ let to_code ~host = let (defns,_) = host in function
   | ENOPROTOOPT -> defns.enoprotoopt
   | ENOSPC -> defns.enospc
   | ENOSYS -> defns.enosys
+  | ENOTBLK -> defns.enotblk
   | ENOTCONN -> defns.enotconn
   | ENOTDIR -> defns.enotdir
   | ENOTEMPTY -> defns.enotempty
@@ -352,6 +362,7 @@ let to_code ~host = let (defns,_) = host in function
   | EPROTONOSUPPORT -> defns.eprotonosupport
   | EPROTOTYPE -> defns.eprototype
   | ERANGE -> defns.erange
+  | EREMOTE -> defns.eremote
   | EROFS -> defns.erofs
   | ESHUTDOWN -> defns.eshutdown
   | ESOCKTNOSUPPORT -> defns.esocktnosupport
@@ -361,6 +372,7 @@ let to_code ~host = let (defns,_) = host in function
   | ETIMEDOUT -> defns.etimedout
   | ETOOMANYREFS -> defns.etoomanyrefs
   | ETXTBSY -> defns.etxtbsy
+  | EUSERS -> defns.eusers
   | EWOULDBLOCK -> defns.ewouldblock
   | EXDEV -> defns.exdev
   | EUNKNOWNERR x   -> Some x
@@ -419,6 +431,7 @@ let with_code defns symbol code = match symbol with
   | ENOPROTOOPT -> { defns with enoprotoopt = code }
   | ENOSPC -> { defns with enospc = code }
   | ENOSYS -> { defns with enosys = code }
+  | ENOTBLK -> { defns with enotblk = code }
   | ENOTCONN -> { defns with enotconn = code }
   | ENOTDIR -> { defns with enotdir = code }
   | ENOTEMPTY -> { defns with enotempty = code }
@@ -437,6 +450,7 @@ let with_code defns symbol code = match symbol with
   | EPROTONOSUPPORT -> { defns with eprotonosupport = code }
   | EPROTOTYPE -> { defns with eprototype = code }
   | ERANGE -> { defns with erange = code }
+  | EREMOTE -> { defns with eremote = code }
   | EROFS -> { defns with erofs = code }
   | ESHUTDOWN -> { defns with eshutdown = code }
   | ESOCKTNOSUPPORT -> { defns with esocktnosupport = code }
@@ -446,6 +460,7 @@ let with_code defns symbol code = match symbol with
   | ETIMEDOUT -> { defns with etimedout = code }
   | ETOOMANYREFS -> { defns with etoomanyrefs = code }
   | ETXTBSY -> { defns with etxtbsy = code }
+  | EUSERS -> { defns with eusers = code }
   | EWOULDBLOCK -> { defns with ewouldblock = code }
   | EXDEV -> { defns with exdev = code }
   | EUNKNOWNERR _ -> defns
@@ -510,6 +525,7 @@ let to_string = function
   | ENOPROTOOPT -> "ENOPROTOOPT"
   | ENOSPC -> "ENOSPC"
   | ENOSYS -> "ENOSYS"
+  | ENOTBLK -> "ENOTBLK"
   | ENOTCONN -> "ENOTCONN"
   | ENOTDIR -> "ENOTDIR"
   | ENOTEMPTY -> "ENOTEMPTY"
@@ -528,6 +544,7 @@ let to_string = function
   | EPROTONOSUPPORT -> "EPROTONOSUPPORT"
   | EPROTOTYPE -> "EPROTOTYPE"
   | ERANGE -> "ERANGE"
+  | EREMOTE -> "EREMOTE"
   | EROFS -> "EROFS"
   | ESHUTDOWN -> "ESHUTDOWN"
   | ESOCKTNOSUPPORT -> "ESOCKTNOSUPPORT"
@@ -537,6 +554,7 @@ let to_string = function
   | ETIMEDOUT -> "ETIMEDOUT"
   | ETOOMANYREFS -> "ETOOMANYREFS"
   | ETXTBSY -> "ETXTBSY"
+  | EUSERS -> "EUSERS"
   | EWOULDBLOCK -> "EWOULDBLOCK"
   | EXDEV -> "EXDEV"
   | EUNKNOWNERR x   -> "EUNKNOWNERR_"^(string_of_int x)
@@ -595,6 +613,7 @@ let of_string = function
   | "ENOPROTOOPT" -> Some ENOPROTOOPT
   | "ENOSPC" -> Some ENOSPC
   | "ENOSYS" -> Some ENOSYS
+  | "ENOTBLK" -> Some ENOTBLK
   | "ENOTCONN" -> Some ENOTCONN
   | "ENOTDIR" -> Some ENOTDIR
   | "ENOTEMPTY" -> Some ENOTEMPTY
@@ -613,6 +632,7 @@ let of_string = function
   | "EPROTONOSUPPORT" -> Some EPROTONOSUPPORT
   | "EPROTOTYPE" -> Some EPROTOTYPE
   | "ERANGE" -> Some ERANGE
+  | "EREMOTE" -> Some EREMOTE
   | "EROFS" -> Some EROFS
   | "ESHUTDOWN" -> Some ESHUTDOWN
   | "ESOCKTNOSUPPORT" -> Some ESOCKTNOSUPPORT
@@ -622,6 +642,7 @@ let of_string = function
   | "ETIMEDOUT" -> Some ETIMEDOUT
   | "ETOOMANYREFS" -> Some ETOOMANYREFS
   | "ETXTBSY" -> Some ETXTBSY
+  | "EUSERS" -> Some EUSERS
   | "EWOULDBLOCK" -> Some EWOULDBLOCK
   | "EXDEV" -> Some EXDEV
   | _ -> None
@@ -733,6 +754,8 @@ let iter_defns defns f_exist f_missing =
    | Some x -> f_exist x ENOSPC | None -> f_missing ENOSPC);
   (match defns.enosys with
    | Some x -> f_exist x ENOSYS | None -> f_missing ENOSYS);
+  (match defns.enotblk with
+   | Some x -> f_exist x ENOTBLK | None -> f_missing ENOTBLK);
   (match defns.enotconn with
    | Some x -> f_exist x ENOTCONN | None -> f_missing ENOTCONN);
   (match defns.enotdir with
@@ -769,6 +792,8 @@ let iter_defns defns f_exist f_missing =
    | Some x -> f_exist x EPROTOTYPE | None -> f_missing EPROTOTYPE);
   (match defns.erange with
    | Some x -> f_exist x ERANGE | None -> f_missing ERANGE);
+  (match defns.eremote with
+   | Some x -> f_exist x EREMOTE | None -> f_missing EREMOTE);
   (match defns.erofs with
    | Some x -> f_exist x EROFS | None -> f_missing EROFS);
   (match defns.eshutdown with
@@ -787,6 +812,8 @@ let iter_defns defns f_exist f_missing =
    | Some x -> f_exist x ETOOMANYREFS | None -> f_missing ETOOMANYREFS);
   (match defns.etxtbsy with
    | Some x -> f_exist x ETXTBSY | None -> f_missing ETXTBSY);
+  (match defns.eusers with
+   | Some x -> f_exist x EUSERS | None -> f_missing EUSERS);
   (match defns.ewouldblock with
    | Some x -> f_exist x EWOULDBLOCK | None -> f_missing EWOULDBLOCK);
   (match defns.exdev with
