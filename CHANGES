@@ -1,4 +1,4 @@
-0.4.0 (trunk):
+0.4.0 (2016-05-01):
 * Remove Errno_host.Linux.v4_0_5 and Errno_host.OSX.v10_11_1
 * Add Errno_host.Linux.v4_4_6 and Errno_host.OSX.v10_11_4
 * Changed the return type of Errno_unix.raise_on_errno to be 'a option
