@@ -183,7 +183,7 @@ let optional_unknown ~host errno = match Errno.to_code ~host errno with
   | Some i -> Some (Unix.EUNKNOWNERR i)
   | None -> None
 
-let to_unix ~host = Errno.(function
+let to_unix ?(host=host) = Errno.(function
   | E2BIG -> Some Unix.E2BIG
   | EACCES -> Some Unix.EACCES
   | EADDRINUSE -> Some Unix.EADDRINUSE
@@ -341,7 +341,7 @@ let to_unix ~host = Errno.(function
   | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR x)
 )
 
-let of_unix ~host = Unix.(function
+let of_unix ?(host=host) = Unix.(function
   | E2BIG -> [Errno.E2BIG]
   | EACCES -> [Errno.EACCES]
   | EADDRINUSE -> [Errno.EADDRINUSE]

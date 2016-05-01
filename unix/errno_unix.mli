@@ -17,9 +17,15 @@
 
 val host : Errno.Host.t
 
-val to_unix : host:Errno.Host.t -> Errno.t -> Unix.error option
+val to_unix : ?host:Errno.Host.t -> Errno.t -> Unix.error option
+(** [to_unix ?host errno] is the {!Unix.error} corresponding to
+    [errno] if one exists. If [host] is not supplied, {!host} will be
+    used. *)
 
-val of_unix : host:Errno.Host.t -> Unix.error -> Errno.t list
+val of_unix : ?host:Errno.Host.t -> Unix.error -> Errno.t list
+(** [of_unix ?host error] is the list of symbolic error numbers
+    corresponding to the {!Unix.error}, [error]. If [host] is not
+    supplied, {!host} will be used. *)
 
 val raise_on_errno : ?call:string -> ?label:string -> (unit -> 'a) -> 'a
 
