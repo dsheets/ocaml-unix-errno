@@ -16,9 +16,9 @@
  *)
 
 module Linux : sig
-  val v4_0_5 : Errno.Host.t
+  val v4_4_6 : Errno.Host.t
 end
 
 module OSX : sig
-  val v10_11_1 : Errno.Host.t
+  val v10_11_4 : Errno.Host.t
 end

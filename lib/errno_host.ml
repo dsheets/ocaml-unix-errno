@@ -16,9 +16,9 @@
  *)
 
 module Linux = struct
-  let v4_0_5 = Errno_map_linux_4_0_5.host
+  let v4_4_6 = Errno_map_linux_4_4_6.host
 end
 
 module OSX = struct
-  let v10_11_1 = Errno_map_osx_10_11_1.host
+  let v10_11_4 = Errno_map_osx_10_11_4.host
 end
