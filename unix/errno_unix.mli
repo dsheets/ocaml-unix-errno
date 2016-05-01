@@ -16,6 +16,8 @@
  *)
 
 val host : Errno.Host.t
+(** [host] is the bidirectional error number map for the host upon
+    which this code is executing. *)
 
 val to_unix : ?host:Errno.Host.t -> Errno.t -> Unix.error option
 (** [to_unix ?host errno] is the {!Unix.error} corresponding to
@@ -59,3 +61,6 @@ val to_unix_exn : exn -> exn
     Otherwise, [to_unix_exn] does not modify [exn]. *)
 
 val with_unix_exn : (unit -> 'a) -> 'a
+(** [with_unix_exn fn] raises {!Unix.Unix_error} instead of
+    {!Errno.Error} if [fn] raises the latter and an errno code exists
+    on the present host. *)
