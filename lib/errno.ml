@@ -101,6 +101,75 @@ type t =
   | EUSERS
   | EWOULDBLOCK
   | EXDEV
+  | ECHRNG
+  | EL2NSYNC
+  | EL3HLT
+  | EL3RST
+  | ELNRNG
+  | EUNATCH
+  | ENOCSI
+  | EL2HLT
+  | EBADE
+  | EBADR
+  | EXFULL
+  | ENOANO
+  | EBADRQC
+  | EBADSLT
+  | EBFONT
+  | ENONET
+  | ENOPKG
+  | EADV
+  | ESRMNT
+  | ECOMM
+  | EDOTDOT
+  | ENOTUNIQ
+  | EBADFD
+  | EREMCHG
+  | ELIBACC
+  | ELIBBAD
+  | ELIBSCN
+  | ELIBMAX
+  | ELIBEXEC
+  | ERESTART
+  | ESTRPIPE
+  | EUCLEAN
+  | ENOTNAM
+  | ENAVAIL
+  | EISNAM
+  | EREMOTEIO
+  | ENOMEDIUM
+  | EMEDIUMTYPE
+  | ENOKEY
+  | EKEYEXPIRED
+  | EKEYREVOKED
+  | EKEYREJECTED
+  | ERFKILL
+  | EHWPOISON
+  | EPWROFF
+  | EDEVERR
+  | EBADEXEC
+  | EBADARCH
+  | ESHLIBVERS
+  | EBADMACHO
+  | ENOPOLICY
+  | EQFULL
+  | EDOOFUS
+  | ENOTCAPABLE
+  | ECAPMODE
+  | EPROCLIM
+  | EBADRPC
+  | ERPCMISMATCH
+  | EPROGUNAVAIL
+  | EPROGMISMATCH
+  | EPROCUNAVAIL
+  | EFTYPE
+  | EAUTH
+  | ENEEDAUTH
+  | ENOATTR
+  | ENOSTR
+  | ENODATA
+  | ETIME
+  | ENOSR
   | EUNKNOWNERR of int
 
 type error = {
@@ -197,6 +266,75 @@ type defns = {
   eusers : int option;
   ewouldblock : int option;
   exdev : int option;
+  echrng : int option;
+  el2nsync : int option;
+  el3hlt : int option;
+  el3rst : int option;
+  elnrng : int option;
+  eunatch : int option;
+  enocsi : int option;
+  el2hlt : int option;
+  ebade : int option;
+  ebadr : int option;
+  exfull : int option;
+  enoano : int option;
+  ebadrqc : int option;
+  ebadslt : int option;
+  ebfont : int option;
+  enonet : int option;
+  enopkg : int option;
+  eadv : int option;
+  esrmnt : int option;
+  ecomm : int option;
+  edotdot : int option;
+  enotuniq : int option;
+  ebadfd : int option;
+  eremchg : int option;
+  elibacc : int option;
+  elibbad : int option;
+  elibscn : int option;
+  elibmax : int option;
+  elibexec : int option;
+  erestart : int option;
+  estrpipe : int option;
+  euclean : int option;
+  enotnam : int option;
+  enavail : int option;
+  eisnam : int option;
+  eremoteio : int option;
+  enomedium : int option;
+  emediumtype : int option;
+  enokey : int option;
+  ekeyexpired : int option;
+  ekeyrevoked : int option;
+  ekeyrejected : int option;
+  erfkill : int option;
+  ehwpoison : int option;
+  epwroff : int option;
+  edeverr : int option;
+  ebadexec : int option;
+  ebadarch : int option;
+  eshlibvers : int option;
+  ebadmacho : int option;
+  enopolicy : int option;
+  eqfull : int option;
+  edoofus : int option;
+  enotcapable : int option;
+  ecapmode : int option;
+  eproclim : int option;
+  ebadrpc : int option;
+  erpcmismatch : int option;
+  eprogunavail : int option;
+  eprogmismatch : int option;
+  eprocunavail : int option;
+  eftype : int option;
+  eauth : int option;
+  eneedauth : int option;
+  enoattr : int option;
+  enostr : int option;
+  enodata : int option;
+  etime : int option;
+  enosr : int option;
 }
 
 type index = (int, t) Hashtbl.t
@@ -287,6 +425,75 @@ let empty_defns = {
   eusers = None;
   ewouldblock = None;
   exdev = None;
+  echrng = None;
+  el2nsync = None;
+  el3hlt = None;
+  el3rst = None;
+  elnrng = None;
+  eunatch = None;
+  enocsi = None;
+  el2hlt = None;
+  ebade = None;
+  ebadr = None;
+  exfull = None;
+  enoano = None;
+  ebadrqc = None;
+  ebadslt = None;
+  ebfont = None;
+  enonet = None;
+  enopkg = None;
+  eadv = None;
+  esrmnt = None;
+  ecomm = None;
+  edotdot = None;
+  enotuniq = None;
+  ebadfd = None;
+  eremchg = None;
+  elibacc = None;
+  elibbad = None;
+  elibscn = None;
+  elibmax = None;
+  elibexec = None;
+  erestart = None;
+  estrpipe = None;
+  euclean = None;
+  enotnam = None;
+  enavail = None;
+  eisnam = None;
+  eremoteio = None;
+  enomedium = None;
+  emediumtype = None;
+  enokey = None;
+  ekeyexpired = None;
+  ekeyrevoked = None;
+  ekeyrejected = None;
+  erfkill = None;
+  ehwpoison = None;
+  epwroff = None;
+  edeverr = None;
+  ebadexec = None;
+  ebadarch = None;
+  eshlibvers = None;
+  ebadmacho = None;
+  enopolicy = None;
+  eqfull = None;
+  edoofus = None;
+  enotcapable = None;
+  ecapmode = None;
+  eproclim = None;
+  ebadrpc = None;
+  erpcmismatch = None;
+  eprogunavail = None;
+  eprogmismatch = None;
+  eprocunavail = None;
+  eftype = None;
+  eauth = None;
+  eneedauth = None;
+  enoattr = None;
+  enostr = None;
+  enodata = None;
+  etime = None;
+  enosr = None;
 }
 
 let to_code ~host = let (defns,_) = host in function
@@ -375,6 +582,75 @@ let to_code ~host = let (defns,_) = host in function
   | EUSERS -> defns.eusers
   | EWOULDBLOCK -> defns.ewouldblock
   | EXDEV -> defns.exdev
+  | ECHRNG -> defns.echrng
+  | EL2NSYNC -> defns.el2nsync
+  | EL3HLT -> defns.el3hlt
+  | EL3RST -> defns.el3rst
+  | ELNRNG -> defns.elnrng
+  | EUNATCH -> defns.eunatch
+  | ENOCSI -> defns.enocsi
+  | EL2HLT -> defns.el2hlt
+  | EBADE -> defns.ebade
+  | EBADR -> defns.ebadr
+  | EXFULL -> defns.exfull
+  | ENOANO -> defns.enoano
+  | EBADRQC -> defns.ebadrqc
+  | EBADSLT -> defns.ebadslt
+  | EBFONT -> defns.ebfont
+  | ENONET -> defns.enonet
+  | ENOPKG -> defns.enopkg
+  | EADV -> defns.eadv
+  | ESRMNT -> defns.esrmnt
+  | ECOMM -> defns.ecomm
+  | EDOTDOT -> defns.edotdot
+  | ENOTUNIQ -> defns.enotuniq
+  | EBADFD -> defns.ebadfd
+  | EREMCHG -> defns.eremchg
+  | ELIBACC -> defns.elibacc
+  | ELIBBAD -> defns.elibbad
+  | ELIBSCN -> defns.elibscn
+  | ELIBMAX -> defns.elibmax
+  | ELIBEXEC -> defns.elibexec
+  | ERESTART -> defns.erestart
+  | ESTRPIPE -> defns.estrpipe
+  | EUCLEAN -> defns.euclean
+  | ENOTNAM -> defns.enotnam
+  | ENAVAIL -> defns.enavail
+  | EISNAM -> defns.eisnam
+  | EREMOTEIO -> defns.eremoteio
+  | ENOMEDIUM -> defns.enomedium
+  | EMEDIUMTYPE -> defns.emediumtype
+  | ENOKEY -> defns.enokey
+  | EKEYEXPIRED -> defns.ekeyexpired
+  | EKEYREVOKED -> defns.ekeyrevoked
+  | EKEYREJECTED -> defns.ekeyrejected
+  | ERFKILL -> defns.erfkill
+  | EHWPOISON -> defns.ehwpoison
+  | EPWROFF -> defns.epwroff
+  | EDEVERR -> defns.edeverr
+  | EBADEXEC -> defns.ebadexec
+  | EBADARCH -> defns.ebadarch
+  | ESHLIBVERS -> defns.eshlibvers
+  | EBADMACHO -> defns.ebadmacho
+  | ENOPOLICY -> defns.enopolicy
+  | EQFULL -> defns.eqfull
+  | EDOOFUS -> defns.edoofus
+  | ENOTCAPABLE -> defns.enotcapable
+  | ECAPMODE -> defns.ecapmode
+  | EPROCLIM -> defns.eproclim
+  | EBADRPC -> defns.ebadrpc
+  | ERPCMISMATCH -> defns.erpcmismatch
+  | EPROGUNAVAIL -> defns.eprogunavail
+  | EPROGMISMATCH -> defns.eprogmismatch
+  | EPROCUNAVAIL -> defns.eprocunavail
+  | EFTYPE -> defns.eftype
+  | EAUTH -> defns.eauth
+  | ENEEDAUTH -> defns.eneedauth
+  | ENOATTR -> defns.enoattr
+  | ENOSTR -> defns.enostr
+  | ENODATA -> defns.enodata
+  | ETIME -> defns.etime
+  | ENOSR -> defns.enosr
   | EUNKNOWNERR x   -> Some x
 
 let with_code defns symbol code = match symbol with
@@ -463,6 +739,75 @@ let with_code defns symbol code = match symbol with
   | EUSERS -> { defns with eusers = code }
   | EWOULDBLOCK -> { defns with ewouldblock = code }
   | EXDEV -> { defns with exdev = code }
+  | ECHRNG -> { defns with echrng = code }
+  | EL2NSYNC -> { defns with el2nsync = code }
+  | EL3HLT -> { defns with el3hlt = code }
+  | EL3RST -> { defns with el3rst = code }
+  | ELNRNG -> { defns with elnrng = code }
+  | EUNATCH -> { defns with eunatch = code }
+  | ENOCSI -> { defns with enocsi = code }
+  | EL2HLT -> { defns with el2hlt = code }
+  | EBADE -> { defns with ebade = code }
+  | EBADR -> { defns with ebadr = code }
+  | EXFULL -> { defns with exfull = code }
+  | ENOANO -> { defns with enoano = code }
+  | EBADRQC -> { defns with ebadrqc = code }
+  | EBADSLT -> { defns with ebadslt = code }
+  | EBFONT -> { defns with ebfont = code }
+  | ENONET -> { defns with enonet = code }
+  | ENOPKG -> { defns with enopkg = code }
+  | EADV -> { defns with eadv = code }
+  | ESRMNT -> { defns with esrmnt = code }
+  | ECOMM -> { defns with ecomm = code }
+  | EDOTDOT -> { defns with edotdot = code }
+  | ENOTUNIQ -> { defns with enotuniq = code }
+  | EBADFD -> { defns with ebadfd = code }
+  | EREMCHG -> { defns with eremchg = code }
+  | ELIBACC -> { defns with elibacc = code }
+  | ELIBBAD -> { defns with elibbad = code }
+  | ELIBSCN -> { defns with elibscn = code }
+  | ELIBMAX -> { defns with elibmax = code }
+  | ELIBEXEC -> { defns with elibexec = code }
+  | ERESTART -> { defns with erestart = code }
+  | ESTRPIPE -> { defns with estrpipe = code }
+  | EUCLEAN -> { defns with euclean = code }
+  | ENOTNAM -> { defns with enotnam = code }
+  | ENAVAIL -> { defns with enavail = code }
+  | EISNAM -> { defns with eisnam = code }
+  | EREMOTEIO -> { defns with eremoteio = code }
+  | ENOMEDIUM -> { defns with enomedium = code }
+  | EMEDIUMTYPE -> { defns with emediumtype = code }
+  | ENOKEY -> { defns with enokey = code }
+  | EKEYEXPIRED -> { defns with ekeyexpired = code }
+  | EKEYREVOKED -> { defns with ekeyrevoked = code }
+  | EKEYREJECTED -> { defns with ekeyrejected = code }
+  | ERFKILL -> { defns with erfkill = code }
+  | EHWPOISON -> { defns with ehwpoison = code }
+  | EPWROFF -> { defns with epwroff = code }
+  | EDEVERR -> { defns with edeverr = code }
+  | EBADEXEC -> { defns with ebadexec = code }
+  | EBADARCH -> { defns with ebadarch = code }
+  | ESHLIBVERS -> { defns with eshlibvers = code }
+  | EBADMACHO -> { defns with ebadmacho = code }
+  | ENOPOLICY -> { defns with enopolicy = code }
+  | EQFULL -> { defns with eqfull = code }
+  | EDOOFUS -> { defns with edoofus = code }
+  | ENOTCAPABLE -> { defns with enotcapable = code }
+  | ECAPMODE -> { defns with ecapmode = code }
+  | EPROCLIM -> { defns with eproclim = code }
+  | EBADRPC -> { defns with ebadrpc = code }
+  | ERPCMISMATCH -> { defns with erpcmismatch = code }
+  | EPROGUNAVAIL -> { defns with eprogunavail = code }
+  | EPROGMISMATCH -> { defns with eprogmismatch = code }
+  | EPROCUNAVAIL -> { defns with eprocunavail = code }
+  | EFTYPE -> { defns with eftype = code }
+  | EAUTH -> { defns with eauth = code }
+  | ENEEDAUTH -> { defns with eneedauth = code }
+  | ENOATTR -> { defns with enoattr = code }
+  | ENOSTR -> { defns with enostr = code }
+  | ENODATA -> { defns with enodata = code }
+  | ETIME -> { defns with etime = code }
+  | ENOSR -> { defns with enosr = code }
   | EUNKNOWNERR _ -> defns
 
 let of_code ~host code =
@@ -557,6 +902,75 @@ let to_string = function
   | EUSERS -> "EUSERS"
   | EWOULDBLOCK -> "EWOULDBLOCK"
   | EXDEV -> "EXDEV"
+  | ECHRNG -> "ECHRNG"
+  | EL2NSYNC -> "EL2NSYNC"
+  | EL3HLT -> "EL3HLT"
+  | EL3RST -> "EL3RST"
+  | ELNRNG -> "ELNRNG"
+  | EUNATCH -> "EUNATCH"
+  | ENOCSI -> "ENOCSI"
+  | EL2HLT -> "EL2HLT"
+  | EBADE -> "EBADE"
+  | EBADR -> "EBADR"
+  | EXFULL -> "EXFULL"
+  | ENOANO -> "ENOANO"
+  | EBADRQC -> "EBADRQC"
+  | EBADSLT -> "EBADSLT"
+  | EBFONT -> "EBFONT"
+  | ENONET -> "ENONET"
+  | ENOPKG -> "ENOPKG"
+  | EADV -> "EADV"
+  | ESRMNT -> "ESRMNT"
+  | ECOMM -> "ECOMM"
+  | EDOTDOT -> "EDOTDOT"
+  | ENOTUNIQ -> "ENOTUNIQ"
+  | EBADFD -> "EBADFD"
+  | EREMCHG -> "EREMCHG"
+  | ELIBACC -> "ELIBACC"
+  | ELIBBAD -> "ELIBBAD"
+  | ELIBSCN -> "ELIBSCN"
+  | ELIBMAX -> "ELIBMAX"
+  | ELIBEXEC -> "ELIBEXEC"
+  | ERESTART -> "ERESTART"
+  | ESTRPIPE -> "ESTRPIPE"
+  | EUCLEAN -> "EUCLEAN"
+  | ENOTNAM -> "ENOTNAM"
+  | ENAVAIL -> "ENAVAIL"
+  | EISNAM -> "EISNAM"
+  | EREMOTEIO -> "EREMOTEIO"
+  | ENOMEDIUM -> "ENOMEDIUM"
+  | EMEDIUMTYPE -> "EMEDIUMTYPE"
+  | ENOKEY -> "ENOKEY"
+  | EKEYEXPIRED -> "EKEYEXPIRED"
+  | EKEYREVOKED -> "EKEYREVOKED"
+  | EKEYREJECTED -> "EKEYREJECTED"
+  | ERFKILL -> "ERFKILL"
+  | EHWPOISON -> "EHWPOISON"
+  | EPWROFF -> "EPWROFF"
+  | EDEVERR -> "EDEVERR"
+  | EBADEXEC -> "EBADEXEC"
+  | EBADARCH -> "EBADARCH"
+  | ESHLIBVERS -> "ESHLIBVERS"
+  | EBADMACHO -> "EBADMACHO"
+  | ENOPOLICY -> "ENOPOLICY"
+  | EQFULL -> "EQFULL"
+  | EDOOFUS -> "EDOOFUS"
+  | ENOTCAPABLE -> "ENOTCAPABLE"
+  | ECAPMODE -> "ECAPMODE"
+  | EPROCLIM -> "EPROCLIM"
+  | EBADRPC -> "EBADRPC"
+  | ERPCMISMATCH -> "ERPCMISMATCH"
+  | EPROGUNAVAIL -> "EPROGUNAVAIL"
+  | EPROGMISMATCH -> "EPROGMISMATCH"
+  | EPROCUNAVAIL -> "EPROCUNAVAIL"
+  | EFTYPE -> "EFTYPE"
+  | EAUTH -> "EAUTH"
+  | ENEEDAUTH -> "ENEEDAUTH"
+  | ENOATTR -> "ENOATTR"
+  | ENOSTR -> "ENOSTR"
+  | ENODATA -> "ENODATA"
+  | ETIME -> "ETIME"
+  | ENOSR -> "ENOSR"
   | EUNKNOWNERR x   -> "EUNKNOWNERR_"^(string_of_int x)
 
 let of_string = function
@@ -645,6 +1059,75 @@ let of_string = function
   | "EUSERS" -> Some EUSERS
   | "EWOULDBLOCK" -> Some EWOULDBLOCK
   | "EXDEV" -> Some EXDEV
+  | "ECHRNG" -> Some ECHRNG
+  | "EL2NSYNC" -> Some EL2NSYNC
+  | "EL3HLT" -> Some EL3HLT
+  | "EL3RST" -> Some EL3RST
+  | "ELNRNG" -> Some ELNRNG
+  | "EUNATCH" -> Some EUNATCH
+  | "ENOCSI" -> Some ENOCSI
+  | "EL2HLT" -> Some EL2HLT
+  | "EBADE" -> Some EBADE
+  | "EBADR" -> Some EBADR
+  | "EXFULL" -> Some EXFULL
+  | "ENOANO" -> Some ENOANO
+  | "EBADRQC" -> Some EBADRQC
+  | "EBADSLT" -> Some EBADSLT
+  | "EBFONT" -> Some EBFONT
+  | "ENONET" -> Some ENONET
+  | "ENOPKG" -> Some ENOPKG
+  | "EADV" -> Some EADV
+  | "ESRMNT" -> Some ESRMNT
+  | "ECOMM" -> Some ECOMM
+  | "EDOTDOT" -> Some EDOTDOT
+  | "ENOTUNIQ" -> Some ENOTUNIQ
+  | "EBADFD" -> Some EBADFD
+  | "EREMCHG" -> Some EREMCHG
+  | "ELIBACC" -> Some ELIBACC
+  | "ELIBBAD" -> Some ELIBBAD
+  | "ELIBSCN" -> Some ELIBSCN
+  | "ELIBMAX" -> Some ELIBMAX
+  | "ELIBEXEC" -> Some ELIBEXEC
+  | "ERESTART" -> Some ERESTART
+  | "ESTRPIPE" -> Some ESTRPIPE
+  | "EUCLEAN" -> Some EUCLEAN
+  | "ENOTNAM" -> Some ENOTNAM
+  | "ENAVAIL" -> Some ENAVAIL
+  | "EISNAM" -> Some EISNAM
+  | "EREMOTEIO" -> Some EREMOTEIO
+  | "ENOMEDIUM" -> Some ENOMEDIUM
+  | "EMEDIUMTYPE" -> Some EMEDIUMTYPE
+  | "ENOKEY" -> Some ENOKEY
+  | "EKEYEXPIRED" -> Some EKEYEXPIRED
+  | "EKEYREVOKED" -> Some EKEYREVOKED
+  | "EKEYREJECTED" -> Some EKEYREJECTED
+  | "ERFKILL" -> Some ERFKILL
+  | "EHWPOISON" -> Some EHWPOISON
+  | "EPWROFF" -> Some EPWROFF
+  | "EDEVERR" -> Some EDEVERR
+  | "EBADEXEC" -> Some EBADEXEC
+  | "EBADARCH" -> Some EBADARCH
+  | "ESHLIBVERS" -> Some ESHLIBVERS
+  | "EBADMACHO" -> Some EBADMACHO
+  | "ENOPOLICY" -> Some ENOPOLICY
+  | "EQFULL" -> Some EQFULL
+  | "EDOOFUS" -> Some EDOOFUS
+  | "ENOTCAPABLE" -> Some ENOTCAPABLE
+  | "ECAPMODE" -> Some ECAPMODE
+  | "EPROCLIM" -> Some EPROCLIM
+  | "EBADRPC" -> Some EBADRPC
+  | "ERPCMISMATCH" -> Some ERPCMISMATCH
+  | "EPROGUNAVAIL" -> Some EPROGUNAVAIL
+  | "EPROGMISMATCH" -> Some EPROGMISMATCH
+  | "EPROCUNAVAIL" -> Some EPROCUNAVAIL
+  | "EFTYPE" -> Some EFTYPE
+  | "EAUTH" -> Some EAUTH
+  | "ENEEDAUTH" -> Some ENEEDAUTH
+  | "ENOATTR" -> Some ENOATTR
+  | "ENOSTR" -> Some ENOSTR
+  | "ENODATA" -> Some ENODATA
+  | "ETIME" -> Some ETIME
+  | "ENOSR" -> Some ENOSR
   | _ -> None
 
 let iter_defns defns f_exist f_missing =
@@ -817,7 +1300,146 @@ let iter_defns defns f_exist f_missing =
   (match defns.ewouldblock with
    | Some x -> f_exist x EWOULDBLOCK | None -> f_missing EWOULDBLOCK);
   (match defns.exdev with
-   | Some x -> f_exist x EXDEV | None -> f_missing EXDEV)
+   | Some x -> f_exist x EXDEV | None -> f_missing EXDEV);
+  (match defns.echrng with
+   | Some x -> f_exist x ECHRNG | None -> f_missing ECHRNG);
+  (match defns.el2nsync with
+   | Some x -> f_exist x EL2NSYNC | None -> f_missing EL2NSYNC);
+  (match defns.el3hlt with
+   | Some x -> f_exist x EL3HLT | None -> f_missing EL3HLT);
+  (match defns.el3rst with
+   | Some x -> f_exist x EL3RST | None -> f_missing EL3RST);
+  (match defns.elnrng with
+   | Some x -> f_exist x ELNRNG | None -> f_missing ELNRNG);
+  (match defns.eunatch with
+   | Some x -> f_exist x EUNATCH | None -> f_missing EUNATCH);
+  (match defns.enocsi with
+   | Some x -> f_exist x ENOCSI | None -> f_missing ENOCSI);
+  (match defns.el2hlt with
+   | Some x -> f_exist x EL2HLT | None -> f_missing EL2HLT);
+  (match defns.ebade with
+   | Some x -> f_exist x EBADE | None -> f_missing EBADE);
+  (match defns.ebadr with
+   | Some x -> f_exist x EBADR | None -> f_missing EBADR);
+  (match defns.exfull with
+   | Some x -> f_exist x EXFULL | None -> f_missing EXFULL);
+  (match defns.enoano with
+   | Some x -> f_exist x ENOANO | None -> f_missing ENOANO);
+  (match defns.ebadrqc with
+   | Some x -> f_exist x EBADRQC | None -> f_missing EBADRQC);
+  (match defns.ebadslt with
+   | Some x -> f_exist x EBADSLT | None -> f_missing EBADSLT);
+  (match defns.ebfont with
+   | Some x -> f_exist x EBFONT | None -> f_missing EBFONT);
+  (match defns.enonet with
+   | Some x -> f_exist x ENONET | None -> f_missing ENONET);
+  (match defns.enopkg with
+   | Some x -> f_exist x ENOPKG | None -> f_missing ENOPKG);
+  (match defns.eadv with
+   | Some x -> f_exist x EADV | None -> f_missing EADV);
+  (match defns.esrmnt with
+   | Some x -> f_exist x ESRMNT | None -> f_missing ESRMNT);
+  (match defns.ecomm with
+   | Some x -> f_exist x ECOMM | None -> f_missing ECOMM);
+  (match defns.edotdot with
+   | Some x -> f_exist x EDOTDOT | None -> f_missing EDOTDOT);
+  (match defns.enotuniq with
+   | Some x -> f_exist x ENOTUNIQ | None -> f_missing ENOTUNIQ);
+  (match defns.ebadfd with
+   | Some x -> f_exist x EBADFD | None -> f_missing EBADFD);
+  (match defns.eremchg with
+   | Some x -> f_exist x EREMCHG | None -> f_missing EREMCHG);
+  (match defns.elibacc with
+   | Some x -> f_exist x ELIBACC | None -> f_missing ELIBACC);
+  (match defns.elibbad with
+   | Some x -> f_exist x ELIBBAD | None -> f_missing ELIBBAD);
+  (match defns.elibscn with
+   | Some x -> f_exist x ELIBSCN | None -> f_missing ELIBSCN);
+  (match defns.elibmax with
+   | Some x -> f_exist x ELIBMAX | None -> f_missing ELIBMAX);
+  (match defns.elibexec with
+   | Some x -> f_exist x ELIBEXEC | None -> f_missing ELIBEXEC);
+  (match defns.erestart with
+   | Some x -> f_exist x ERESTART | None -> f_missing ERESTART);
+  (match defns.estrpipe with
+   | Some x -> f_exist x ESTRPIPE | None -> f_missing ESTRPIPE);
+  (match defns.euclean with
+   | Some x -> f_exist x EUCLEAN | None -> f_missing EUCLEAN);
+  (match defns.enotnam with
+   | Some x -> f_exist x ENOTNAM | None -> f_missing ENOTNAM);
+  (match defns.enavail with
+   | Some x -> f_exist x ENAVAIL | None -> f_missing ENAVAIL);
+  (match defns.eisnam with
+   | Some x -> f_exist x EISNAM | None -> f_missing EISNAM);
+  (match defns.eremoteio with
+   | Some x -> f_exist x EREMOTEIO | None -> f_missing EREMOTEIO);
+  (match defns.enomedium with
+   | Some x -> f_exist x ENOMEDIUM | None -> f_missing ENOMEDIUM);
+  (match defns.emediumtype with
+   | Some x -> f_exist x EMEDIUMTYPE | None -> f_missing EMEDIUMTYPE);
+  (match defns.enokey with
+   | Some x -> f_exist x ENOKEY | None -> f_missing ENOKEY);
+  (match defns.ekeyexpired with
+   | Some x -> f_exist x EKEYEXPIRED | None -> f_missing EKEYEXPIRED);
+  (match defns.ekeyrevoked with
+   | Some x -> f_exist x EKEYREVOKED | None -> f_missing EKEYREVOKED);
+  (match defns.ekeyrejected with
+   | Some x -> f_exist x EKEYREJECTED | None -> f_missing EKEYREJECTED);
+  (match defns.erfkill with
+   | Some x -> f_exist x ERFKILL | None -> f_missing ERFKILL);
+  (match defns.ehwpoison with
+   | Some x -> f_exist x EHWPOISON | None -> f_missing EHWPOISON);
+  (match defns.epwroff with
+   | Some x -> f_exist x EPWROFF | None -> f_missing EPWROFF);
+  (match defns.edeverr with
+   | Some x -> f_exist x EDEVERR | None -> f_missing EDEVERR);
+  (match defns.ebadexec with
+   | Some x -> f_exist x EBADEXEC | None -> f_missing EBADEXEC);
+  (match defns.ebadarch with
+   | Some x -> f_exist x EBADARCH | None -> f_missing EBADARCH);
+  (match defns.eshlibvers with
+   | Some x -> f_exist x ESHLIBVERS | None -> f_missing ESHLIBVERS);
+  (match defns.ebadmacho with
+   | Some x -> f_exist x EBADMACHO | None -> f_missing EBADMACHO);
+  (match defns.enopolicy with
+   | Some x -> f_exist x ENOPOLICY | None -> f_missing ENOPOLICY);
+  (match defns.eqfull with
+   | Some x -> f_exist x EQFULL | None -> f_missing EQFULL);
+  (match defns.edoofus with
+   | Some x -> f_exist x EDOOFUS | None -> f_missing EDOOFUS);
+  (match defns.enotcapable with
+   | Some x -> f_exist x ENOTCAPABLE | None -> f_missing ENOTCAPABLE);
+  (match defns.ecapmode with
+   | Some x -> f_exist x ECAPMODE | None -> f_missing ECAPMODE);
+  (match defns.eproclim with
+   | Some x -> f_exist x EPROCLIM | None -> f_missing EPROCLIM);
+  (match defns.ebadrpc with
+   | Some x -> f_exist x EBADRPC | None -> f_missing EBADRPC);
+  (match defns.erpcmismatch with
+   | Some x -> f_exist x ERPCMISMATCH | None -> f_missing ERPCMISMATCH);
+  (match defns.eprogunavail with
+   | Some x -> f_exist x EPROGUNAVAIL | None -> f_missing EPROGUNAVAIL);
+  (match defns.eprogmismatch with
+   | Some x -> f_exist x EPROGMISMATCH | None -> f_missing EPROGMISMATCH);
+  (match defns.eprocunavail with
+   | Some x -> f_exist x EPROCUNAVAIL | None -> f_missing EPROCUNAVAIL);
+  (match defns.eftype with
+   | Some x -> f_exist x EFTYPE | None -> f_missing EFTYPE);
+  (match defns.eauth with
+   | Some x -> f_exist x EAUTH | None -> f_missing EAUTH);
+  (match defns.eneedauth with
+   | Some x -> f_exist x ENEEDAUTH | None -> f_missing ENEEDAUTH);
+  (match defns.enoattr with
+   | Some x -> f_exist x ENOATTR | None -> f_missing ENOATTR);
+  (match defns.enostr with
+   | Some x -> f_exist x ENOSTR | None -> f_missing ENOSTR);
+  (match defns.enodata with
+   | Some x -> f_exist x ENODATA | None -> f_missing ENODATA);
+  (match defns.etime with
+   | Some x -> f_exist x ETIME | None -> f_missing ETIME);
+  (match defns.enosr with
+   | Some x -> f_exist x ENOSR | None -> f_missing ENOSR);
+  ()
 
 module Host = struct
   type t = defns * index

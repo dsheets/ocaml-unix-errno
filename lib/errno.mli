@@ -101,6 +101,75 @@ type t =
   | EUSERS
   | EWOULDBLOCK
   | EXDEV
+  | ECHRNG
+  | EL2NSYNC
+  | EL3HLT
+  | EL3RST
+  | ELNRNG
+  | EUNATCH
+  | ENOCSI
+  | EL2HLT
+  | EBADE
+  | EBADR
+  | EXFULL
+  | ENOANO
+  | EBADRQC
+  | EBADSLT
+  | EBFONT
+  | ENONET
+  | ENOPKG
+  | EADV
+  | ESRMNT
+  | ECOMM
+  | EDOTDOT
+  | ENOTUNIQ
+  | EBADFD
+  | EREMCHG
+  | ELIBACC
+  | ELIBBAD
+  | ELIBSCN
+  | ELIBMAX
+  | ELIBEXEC
+  | ERESTART
+  | ESTRPIPE
+  | EUCLEAN
+  | ENOTNAM
+  | ENAVAIL
+  | EISNAM
+  | EREMOTEIO
+  | ENOMEDIUM
+  | EMEDIUMTYPE
+  | ENOKEY
+  | EKEYEXPIRED
+  | EKEYREVOKED
+  | EKEYREJECTED
+  | ERFKILL
+  | EHWPOISON
+  | EPWROFF
+  | EDEVERR
+  | EBADEXEC
+  | EBADARCH
+  | ESHLIBVERS
+  | EBADMACHO
+  | ENOPOLICY
+  | EQFULL
+  | EDOOFUS
+  | ENOTCAPABLE
+  | ECAPMODE
+  | EPROCLIM
+  | EBADRPC
+  | ERPCMISMATCH
+  | EPROGUNAVAIL
+  | EPROGMISMATCH
+  | EPROCUNAVAIL
+  | EFTYPE
+  | EAUTH
+  | ENEEDAUTH
+  | ENOATTR
+  | ENOSTR
+  | ENODATA
+  | ETIME
+  | ENOSR
   | EUNKNOWNERR of int
 
 type error = {
@@ -199,6 +268,75 @@ type defns = {
   eusers : int option;
   ewouldblock : int option;
   exdev : int option;
+  echrng : int option;
+  el2nsync : int option;
+  el3hlt : int option;
+  el3rst : int option;
+  elnrng : int option;
+  eunatch : int option;
+  enocsi : int option;
+  el2hlt : int option;
+  ebade : int option;
+  ebadr : int option;
+  exfull : int option;
+  enoano : int option;
+  ebadrqc : int option;
+  ebadslt : int option;
+  ebfont : int option;
+  enonet : int option;
+  enopkg : int option;
+  eadv : int option;
+  esrmnt : int option;
+  ecomm : int option;
+  edotdot : int option;
+  enotuniq : int option;
+  ebadfd : int option;
+  eremchg : int option;
+  elibacc : int option;
+  elibbad : int option;
+  elibscn : int option;
+  elibmax : int option;
+  elibexec : int option;
+  erestart : int option;
+  estrpipe : int option;
+  euclean : int option;
+  enotnam : int option;
+  enavail : int option;
+  eisnam : int option;
+  eremoteio : int option;
+  enomedium : int option;
+  emediumtype : int option;
+  enokey : int option;
+  ekeyexpired : int option;
+  ekeyrevoked : int option;
+  ekeyrejected : int option;
+  erfkill : int option;
+  ehwpoison : int option;
+  epwroff : int option;
+  edeverr : int option;
+  ebadexec : int option;
+  ebadarch : int option;
+  eshlibvers : int option;
+  ebadmacho : int option;
+  enopolicy : int option;
+  eqfull : int option;
+  edoofus : int option;
+  enotcapable : int option;
+  ecapmode : int option;
+  eproclim : int option;
+  ebadrpc : int option;
+  erpcmismatch : int option;
+  eprogunavail : int option;
+  eprogmismatch : int option;
+  eprocunavail : int option;
+  eftype : int option;
+  eauth : int option;
+  eneedauth : int option;
+  enoattr : int option;
+  enostr : int option;
+  enodata : int option;
+  etime : int option;
+  enosr : int option;
 }
 
 module Host : sig
