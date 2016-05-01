@@ -20,6 +20,7 @@ module C = Unix_errno_bindings.C(Unix_errno_generated)
 
 let host =
   let option i = Some i in
+  let platform = function -1 -> None | i -> Some i in
   let defns = Errno.(Type.({
     e2big = option e2big;
     eacces = option eacces;
@@ -74,6 +75,7 @@ let host =
     enoprotoopt = option enoprotoopt;
     enospc = option enospc;
     enosys = option enosys;
+    enotblk = option enotblk;
     enotconn = option enotconn;
     enotdir = option enotdir;
     enotempty = option enotempty;
@@ -92,6 +94,7 @@ let host =
     eprotonosupport = option eprotonosupport;
     eprototype = option eprototype;
     erange = option erange;
+    eremote = option eremote;
     erofs = option erofs;
     eshutdown = option eshutdown;
     esocktnosupport = option esocktnosupport;
@@ -101,8 +104,78 @@ let host =
     etimedout = option etimedout;
     etoomanyrefs = option etoomanyrefs;
     etxtbsy = option etxtbsy;
+    eusers = option eusers;
     ewouldblock = option ewouldblock;
     exdev = option exdev;
+    echrng = platform (C.echrng ());
+    el2nsync = platform (C.el2nsync ());
+    el3hlt = platform (C.el3hlt ());
+    el3rst = platform (C.el3rst ());
+    elnrng = platform (C.elnrng ());
+    eunatch = platform (C.eunatch ());
+    enocsi = platform (C.enocsi ());
+    el2hlt = platform (C.el2hlt ());
+    ebade = platform (C.ebade ());
+    ebadr = platform (C.ebadr ());
+    exfull = platform (C.exfull ());
+    enoano = platform (C.enoano ());
+    ebadrqc = platform (C.ebadrqc ());
+    ebadslt = platform (C.ebadslt ());
+    ebfont = platform (C.ebfont ());
+    enonet = platform (C.enonet ());
+    enopkg = platform (C.enopkg ());
+    eadv = platform (C.eadv ());
+    esrmnt = platform (C.esrmnt ());
+    ecomm = platform (C.ecomm ());
+    edotdot = platform (C.edotdot ());
+    enotuniq = platform (C.enotuniq ());
+    ebadfd = platform (C.ebadfd ());
+    eremchg = platform (C.eremchg ());
+    elibacc = platform (C.elibacc ());
+    elibbad = platform (C.elibbad ());
+    elibscn = platform (C.elibscn ());
+    elibmax = platform (C.elibmax ());
+    elibexec = platform (C.elibexec ());
+    erestart = platform (C.erestart ());
+    estrpipe = platform (C.estrpipe ());
+    euclean = platform (C.euclean ());
+    enotnam = platform (C.enotnam ());
+    enavail = platform (C.enavail ());
+    eisnam = platform (C.eisnam ());
+    eremoteio = platform (C.eremoteio ());
+    enomedium = platform (C.enomedium ());
+    emediumtype = platform (C.emediumtype ());
+    enokey = platform (C.enokey ());
+    ekeyexpired = platform (C.ekeyexpired ());
+    ekeyrevoked = platform (C.ekeyrevoked ());
+    ekeyrejected = platform (C.ekeyrejected ());
+    erfkill = platform (C.erfkill ());
+    ehwpoison = platform (C.ehwpoison ());
+    epwroff = platform (C.epwroff ());
+    edeverr = platform (C.edeverr ());
+    ebadexec = platform (C.ebadexec ());
+    ebadarch = platform (C.ebadarch ());
+    eshlibvers = platform (C.eshlibvers ());
+    ebadmacho = platform (C.ebadmacho ());
+    enopolicy = platform (C.enopolicy ());
+    eqfull = platform (C.eqfull ());
+    edoofus = platform (C.edoofus ());
+    enotcapable = platform (C.enotcapable ());
+    ecapmode = platform (C.ecapmode ());
+    eproclim = platform (C.eproclim ());
+    ebadrpc = platform (C.ebadrpc ());
+    erpcmismatch = platform (C.erpcmismatch ());
+    eprogunavail = platform (C.eprogunavail ());
+    eprogmismatch = platform (C.eprogmismatch ());
+    eprocunavail = platform (C.eprocunavail ());
+    eftype = platform (C.eftype ());
+    eauth = platform (C.eauth ());
+    eneedauth = platform (C.eneedauth ());
+    enoattr = platform (C.enoattr ());
+    enostr = platform (C.enostr ());
+    enodata = platform (C.enodata ());
+    etime = platform (C.etime ());
+    enosr = platform (C.enosr ());
   })) in
   Errno.Host.of_defns defns
 
@@ -164,6 +237,7 @@ let to_unix ~host = Errno.(function
   | ENOPROTOOPT -> Some Unix.ENOPROTOOPT
   | ENOSPC -> Some Unix.ENOSPC
   | ENOSYS -> Some Unix.ENOSYS
+  | ENOTBLK -> optional_unknown ~host ENOTBLK
   | ENOTCONN -> Some Unix.ENOTCONN
   | ENOTDIR -> Some Unix.ENOTDIR
   | ENOTEMPTY -> Some Unix.ENOTEMPTY
@@ -182,6 +256,7 @@ let to_unix ~host = Errno.(function
   | EPROTONOSUPPORT -> Some Unix.EPROTONOSUPPORT
   | EPROTOTYPE -> Some Unix.EPROTOTYPE
   | ERANGE -> Some Unix.ERANGE
+  | EREMOTE -> optional_unknown ~host EREMOTE
   | EROFS -> Some Unix.EROFS
   | ESHUTDOWN -> Some Unix.ESHUTDOWN
   | ESOCKTNOSUPPORT -> Some Unix.ESOCKTNOSUPPORT
@@ -191,8 +266,78 @@ let to_unix ~host = Errno.(function
   | ETIMEDOUT -> Some Unix.ETIMEDOUT
   | ETOOMANYREFS -> Some Unix.ETOOMANYREFS
   | ETXTBSY -> optional_unknown ~host ETXTBSY
+  | EUSERS -> optional_unknown ~host EUSERS
   | EWOULDBLOCK -> Some Unix.EWOULDBLOCK
   | EXDEV -> Some Unix.EXDEV
+  | ECHRNG -> optional_unknown ~host ECHRNG
+  | EL2NSYNC -> optional_unknown ~host EL2NSYNC
+  | EL3HLT -> optional_unknown ~host EL3HLT
+  | EL3RST -> optional_unknown ~host EL3RST
+  | ELNRNG -> optional_unknown ~host ELNRNG
+  | EUNATCH -> optional_unknown ~host EUNATCH
+  | ENOCSI -> optional_unknown ~host ENOCSI
+  | EL2HLT -> optional_unknown ~host EL2HLT
+  | EBADE -> optional_unknown ~host EBADE
+  | EBADR -> optional_unknown ~host EBADR
+  | EXFULL -> optional_unknown ~host EXFULL
+  | ENOANO -> optional_unknown ~host ENOANO
+  | EBADRQC -> optional_unknown ~host EBADRQC
+  | EBADSLT -> optional_unknown ~host EBADSLT
+  | EBFONT -> optional_unknown ~host EBFONT
+  | ENONET -> optional_unknown ~host ENONET
+  | ENOPKG -> optional_unknown ~host ENOPKG
+  | EADV -> optional_unknown ~host EADV
+  | ESRMNT -> optional_unknown ~host ESRMNT
+  | ECOMM -> optional_unknown ~host ECOMM
+  | EDOTDOT -> optional_unknown ~host EDOTDOT
+  | ENOTUNIQ -> optional_unknown ~host ENOTUNIQ
+  | EBADFD -> optional_unknown ~host EBADFD
+  | EREMCHG -> optional_unknown ~host EREMCHG
+  | ELIBACC -> optional_unknown ~host ELIBACC
+  | ELIBBAD -> optional_unknown ~host ELIBBAD
+  | ELIBSCN -> optional_unknown ~host ELIBSCN
+  | ELIBMAX -> optional_unknown ~host ELIBMAX
+  | ELIBEXEC -> optional_unknown ~host ELIBEXEC
+  | ERESTART -> optional_unknown ~host ERESTART
+  | ESTRPIPE -> optional_unknown ~host ESTRPIPE
+  | EUCLEAN -> optional_unknown ~host EUCLEAN
+  | ENOTNAM -> optional_unknown ~host ENOTNAM
+  | ENAVAIL -> optional_unknown ~host ENAVAIL
+  | EISNAM -> optional_unknown ~host EISNAM
+  | EREMOTEIO -> optional_unknown ~host EREMOTEIO
+  | ENOMEDIUM -> optional_unknown ~host ENOMEDIUM
+  | EMEDIUMTYPE -> optional_unknown ~host EMEDIUMTYPE
+  | ENOKEY -> optional_unknown ~host ENOKEY
+  | EKEYEXPIRED -> optional_unknown ~host EKEYEXPIRED
+  | EKEYREVOKED -> optional_unknown ~host EKEYREVOKED
+  | EKEYREJECTED -> optional_unknown ~host EKEYREJECTED
+  | ERFKILL -> optional_unknown ~host ERFKILL
+  | EHWPOISON -> optional_unknown ~host EHWPOISON
+  | EPWROFF -> optional_unknown ~host EPWROFF
+  | EDEVERR -> optional_unknown ~host EDEVERR
+  | EBADEXEC -> optional_unknown ~host EBADEXEC
+  | EBADARCH -> optional_unknown ~host EBADARCH
+  | ESHLIBVERS -> optional_unknown ~host ESHLIBVERS
+  | EBADMACHO -> optional_unknown ~host EBADMACHO
+  | ENOPOLICY -> optional_unknown ~host ENOPOLICY
+  | EQFULL -> optional_unknown ~host EQFULL
+  | EDOOFUS -> optional_unknown ~host EDOOFUS
+  | ENOTCAPABLE -> optional_unknown ~host ENOTCAPABLE
+  | ECAPMODE -> optional_unknown ~host ECAPMODE
+  | EPROCLIM -> optional_unknown ~host EPROCLIM
+  | EBADRPC -> optional_unknown ~host EBADRPC
+  | ERPCMISMATCH -> optional_unknown ~host ERPCMISMATCH
+  | EPROGUNAVAIL -> optional_unknown ~host EPROGUNAVAIL
+  | EPROGMISMATCH -> optional_unknown ~host EPROGMISMATCH
+  | EPROCUNAVAIL -> optional_unknown ~host EPROCUNAVAIL
+  | EFTYPE -> optional_unknown ~host EFTYPE
+  | EAUTH -> optional_unknown ~host EAUTH
+  | ENEEDAUTH -> optional_unknown ~host ENEEDAUTH
+  | ENOATTR -> optional_unknown ~host ENOATTR
+  | ENOSTR -> optional_unknown ~host ENOSTR
+  | ENODATA -> optional_unknown ~host ENODATA
+  | ETIME -> optional_unknown ~host ETIME
+  | ENOSR -> optional_unknown ~host ENOSR
   | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR x)
 )
 

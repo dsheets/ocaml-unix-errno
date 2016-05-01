@@ -82,7 +82,7 @@ dispatch begin
 
     (* Linking tests *)
     flag ["ocaml"; "link"; "byte"; "program"; "use_errno_stubs"] &
-      S[A"-dllib"; A"-lunix_errno_stubs"; A"-I"; A"unix/"];
+      S[A"-dllib"; A"-lunix_errno_stubs"; A"-I"; A"unix"];
     dep ["ocaml"; "link"; "native"; "program"; "use_errno_stubs"]
       ["unix/libunix_errno_stubs"-.-(!Options.ext_lib)];
 
