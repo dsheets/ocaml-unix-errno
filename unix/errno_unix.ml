@@ -413,16 +413,39 @@ let of_unix ?(host=host) = Unix.(function
   | EUNKNOWNERR x -> Errno.of_code ~host x
 )
 
-let raise_on_errno ?(call="") ?(label="") fn =
-  C.reset_errno ();
-  let r = fn () in
-  match C.get_errno () with
-  | 0 -> r
-  | code -> raise Errno.(Error { errno = of_code ~host code; call; label; })
+let get_errno = C.get_errno
 
-let with_unix_exn fn =
-  try fn ()
-  with Errno.Error { Errno.errno = err::_; call; label } as e ->
-    match to_unix ~host err with
-    | Some err -> raise (Unix.Unix_error (err,call,label))
-    | None -> raise e
+let reset_errno = C.reset_errno
+
+let raise_errno ?(call="") ?(label="") code =
+  raise Errno.(Error { errno = of_code ~host code; call; label; })
+
+let raise_on_errno ?(call="") ?(label="") fn =
+  reset_errno ();
+  match fn () with
+  | Some r -> r
+  | None -> raise_errno ~call ~label (get_errno ())
+
+let to_errno_exn = function
+  | Unix.Unix_error (err, call, label) ->
+    let errno = of_unix err in
+    Errno.Error { Errno.errno; call; label }
+  | exn -> exn
+
+let with_errno_exn fn = try fn () with e -> raise (to_errno_exn e)
+
+let rec unix_error_of_errno = function
+  | [] -> None
+  | err::rest -> match to_unix err with
+    | Some err -> Some err
+    | None -> unix_error_of_errno rest
+
+let to_unix_exn = function
+  | Errno.Error { Errno.errno; call; label } as e ->
+    begin match unix_error_of_errno errno with
+      | Some err -> Unix.Unix_error (err, call, label)
+      | None -> e
+    end
+  | exn -> exn
+
+let with_unix_exn fn = try fn () with e -> raise (to_unix_exn e)
