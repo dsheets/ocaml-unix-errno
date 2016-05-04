@@ -7,11 +7,15 @@ homepage: "https://github.com/dsheets/ocaml-unix-errno"
 bug-reports: "https://github.com/dsheets/ocaml-unix-errno/issues"
 dev-repo: "https://github.com/dsheets/ocaml-unix-errno.git"
 license: "ISC"
+tags: ["errno" "errno.h" "errors" "unix" "syscall"]
 build: [
   [make "build"]
 ]
 install: [
   [make "install"]
+]
+build-test: [
+  [make "test"]
 ]
 remove: [make "uninstall"]
 depends: [
