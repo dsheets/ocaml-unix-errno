@@ -1,3 +1,6 @@
+0.4.1 (2016-05-04):
+* Fix linking of Errno_host
+
 0.4.0 (2016-05-01):
 * Remove Errno_host.Linux.v4_0_5 and Errno_host.OSX.v10_11_1
 * Add Errno_host.Linux.v4_4_6 and Errno_host.OSX.v10_11_4

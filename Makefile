@@ -14,7 +14,7 @@ WITH_CTYPES=$(shell ocamlfind query ctypes unix > /dev/null 2>&1 ; echo $$?)
 
 TARGETS=.cma .cmxa
 
-PRODUCTS=$(addprefix errno,$(TARGETS))
+PRODUCTS=$(addprefix errno_,$(TARGETS))
 
 ifeq ($(WITH_CTYPES), 0)
 PRODUCTS+=$(addprefix $(MOD_NAME),$(TARGETS)) \

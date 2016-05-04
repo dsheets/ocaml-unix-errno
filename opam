@@ -1,6 +1,6 @@
 opam-version: "1.2"
 name: "unix-errno"
-version: "0.4.0"
+version: "0.4.1"
 maintainer: "sheets@alum.mit.edu"
 authors: "David Sheets"
 homepage: "https://github.com/dsheets/ocaml-unix-errno"
