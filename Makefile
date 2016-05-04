@@ -26,7 +26,7 @@ TYPES=.mli .cmi .cmti
 
 INSTALL:=$(addprefix errno,$(TYPES)) \
 	 $(addprefix errno_host,$(TYPES)) \
-         $(addprefix errno,$(TARGETS))
+         $(addprefix errno_,$(TARGETS))
 
 INSTALL:=$(addprefix _build/lib/,$(INSTALL))
 
@@ -39,7 +39,7 @@ INSTALL_CTYPES:=$(addprefix _build/unix/,$(INSTALL_CTYPES))
 INSTALL+=$(INSTALL_CTYPES)
 endif
 
-ARCHIVES:=_build/lib/errno.a
+ARCHIVES:=_build/lib/errno_.a
 
 ifeq ($(WITH_CTYPES), 0)
 ARCHIVES+=-dll _build/unix/dll$(MOD_NAME)_stubs.so \
@@ -64,4 +64,3 @@ reinstall: uninstall install
 
 clean:
 	ocamlbuild -clean
-	rm -f lib/errno.cm? unix/errno_unix.cm? lib/errno.o unix/errno_unix.o
