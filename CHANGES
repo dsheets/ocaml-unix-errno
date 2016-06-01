@@ -1,3 +1,6 @@
+0.4.2 (2016-06-01):
+* Add support for ctypes 0.6.0
+
 0.4.1 (2016-05-04):
 * Fix linking of Errno_host
 
