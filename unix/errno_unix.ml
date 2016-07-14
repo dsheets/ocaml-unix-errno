@@ -20,7 +20,7 @@ module C = Unix_errno_bindings.C(Unix_errno_generated)
 
 let host =
   let option i = Some i in
-  let platform = function -1 -> None | i -> Some i in
+  let platform i = Signed.SInt.(if i = minus_one then None else Some i) in
   let defns = Errno.(Type.({
     e2big = option e2big;
     eacces = option eacces;
@@ -180,7 +180,7 @@ let host =
   Errno.Host.of_defns defns
 
 let optional_unknown ~host errno = match Errno.to_code ~host errno with
-  | Some i -> Some (Unix.EUNKNOWNERR i)
+  | Some i -> Some (Unix.EUNKNOWNERR (Signed.SInt.to_int i))
   | None -> None
 
 let to_unix ?(host=host) = Errno.(function
@@ -338,7 +338,7 @@ let to_unix ?(host=host) = Errno.(function
   | ENODATA -> optional_unknown ~host ENODATA
   | ETIME -> optional_unknown ~host ETIME
   | ENOSR -> optional_unknown ~host ENOSR
-  | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR x)
+  | EUNKNOWNERR x -> Some (Unix.EUNKNOWNERR (Signed.SInt.to_int x))
 )
 
 let of_unix ?(host=host) = Unix.(function
@@ -410,7 +410,7 @@ let of_unix ?(host=host) = Unix.(function
   | ETOOMANYREFS -> [Errno.ETOOMANYREFS]
   | EWOULDBLOCK -> [Errno.EWOULDBLOCK]
   | EXDEV -> [Errno.EXDEV]
-  | EUNKNOWNERR x -> Errno.of_code ~host x
+  | EUNKNOWNERR x -> Errno.of_code ~host (Signed.SInt.of_int x)
 )
 
 let get_errno = C.get_errno

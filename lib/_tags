@@ -1,1 +1,2 @@
-<*.{ml,mli}>: package(bytes), package(result)
+<*.{ml,mli}>: package(bytes), package(result), package(ctypes)
+
