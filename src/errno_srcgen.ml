@@ -34,7 +34,7 @@ open Printf
 let field_of_errno errno = String.lowercase (Errno.to_string errno)
 
 let () = Errno.iter_defns defns
-    (fun i errno -> printf "  %s = Some %d;\n" (field_of_errno errno) i)
+    (fun i errno -> printf "  %s = Some (Signed.SInt.of_int64 %LdL);\n" (field_of_errno errno) (Signed.SInt.to_int64 i))
     (fun errno   -> printf "  %s = None;\n" (field_of_errno errno))
 
 let () = print_endline "})\n"

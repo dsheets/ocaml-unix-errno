@@ -29,7 +29,7 @@ val of_unix : ?host:Errno.Host.t -> Unix.error -> Errno.t list
     corresponding to the {!Unix.error}, [error]. If [host] is not
     supplied, {!host} will be used. *)
 
-val get_errno : unit -> int
+val get_errno : unit -> Signed.sint
 (** [get_errno ()] returns the current value of the C [errno]
     thread-local variable. *)
 
@@ -37,7 +37,7 @@ val reset_errno : unit -> unit
 (** [reset_errno ()] sets the current value of the C [errno]
     thread-local variable to 0. *)
 
-val raise_errno : ?call:string -> ?label:string -> int -> 'a
+val raise_errno : ?call:string -> ?label:string -> Signed.sint -> 'a
 (** [raise_errno ?call ?label errno] raises {!Errno.Error} after
     converting [errno] to the appropriate variants via {!host}. [call]
     and [label] default to the empty string. *)

@@ -1,3 +1,6 @@
+0.5.0 (2016-07-26):
+* Switch errno from int to Ctypes.sint
+
 0.4.2 (2016-06-01):
 * Add support for ctypes 0.6.0
 
