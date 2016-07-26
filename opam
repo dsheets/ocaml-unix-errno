@@ -24,10 +24,10 @@ depends: [
   "alcotest" {test}
   "base-bytes"
   "result"
+  "ctypes"
 ]
 depopts: [
   "base-unix"
-  "ctypes"
 ]
 conflicts: [
   "ctypes" {< "0.7.0"}
