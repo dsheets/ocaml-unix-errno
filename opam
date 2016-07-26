@@ -24,12 +24,9 @@ depends: [
   "alcotest" {test}
   "base-bytes"
   "result"
+  "ctypes" {>= "0.7.0"}
 ]
 depopts: [
   "base-unix"
-  "ctypes"
-]
-conflicts: [
-  "ctypes" {< "0.7.0"}
 ]
 available: [ ocaml-version >= "4.01.0" ]
