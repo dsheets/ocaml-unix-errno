@@ -1,6 +1,6 @@
 version = "0.5.0"
 description = "Unix errno types, maps, and support"
-requires = "result bytes"
+requires = "ctypes result bytes"
 archive(byte) = "errno_.cma"
 archive(bytes, plugin) = "errno_.cma"
 archive(native) = "errno_.cmxa"
