@@ -1,3 +1,6 @@
+0.5.1 (2016-08-05):
+* Add a missing ctypes findlib dependency.
+
 0.5.0 (2016-07-26):
 * Switch errno from int to Ctypes.sint
 
