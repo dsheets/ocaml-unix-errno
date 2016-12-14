@@ -22,7 +22,7 @@ PRODUCTS+=$(addprefix $(MOD_NAME),$(TARGETS)) \
           errno_map.byte
 endif
 
-TYPES=.mli .cmi .cmti
+TYPES=.mli .cmi .cmti .cmx
 
 INSTALL:=$(addprefix errno,$(TYPES)) \
 	 $(addprefix errno_host,$(TYPES)) \
