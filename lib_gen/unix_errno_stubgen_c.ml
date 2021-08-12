@@ -15,17 +15,10 @@
  *
  *)
 
-open Ctypes
-
 let () =
   let prefix = "caml_" in
-  let stubs_oc = open_out "unix/unix_errno_stubs.c" in
+  let stubs_oc = open_out "unix_errno_stubs.c" in
   let fmt = Format.formatter_of_out_channel stubs_oc in
   Format.fprintf fmt "#include \"unix_errno_util.h\"@.";
   Cstubs.write_c fmt ~prefix (module Unix_errno_bindings.C);
   close_out stubs_oc;
-
-  let generated_oc = open_out "unix/unix_errno_generated.ml" in
-  let fmt = Format.formatter_of_out_channel generated_oc in
-  Cstubs.write_ml fmt ~prefix (module Unix_errno_bindings.C);
-  close_out generated_oc

@@ -1,4 +1,0 @@
-bin: [
-  "?_build/src/errno_map.byte" {"errno-map"}
-  "_build/src/errno_srcgen.byte" {"errno-srcgen"}
-]

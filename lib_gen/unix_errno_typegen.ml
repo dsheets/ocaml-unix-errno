@@ -15,10 +15,8 @@
  *
  *)
 
-open Ctypes
-
 let () =
-  let type_oc = open_out "lib_gen/unix_errno_types_detect.c" in
+  let type_oc = open_out "unix_errno_types_detect.c" in
   let fmt = Format.formatter_of_out_channel type_oc in
   Format.fprintf fmt "#include <errno.h>@.";
   Cstubs.Types.write_c fmt (module Unix_errno_types.C);
