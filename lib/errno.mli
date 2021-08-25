@@ -172,11 +172,7 @@ type t =
   | ENOSR
   | EUNKNOWNERR of Signed.sint
 
-type error = {
-  errno : t list;
-  call  : string;
-  label : string;
-}
+type error = { errno : t list; call : string; label : string }
 
 exception Error of error
 
@@ -343,23 +339,14 @@ module Host : sig
   type t
 
   val of_defns : defns -> t
-
   val to_defns : t -> defns
-
 end
 
 val to_code : host:Host.t -> t -> Signed.sint option
-
 val of_code : host:Host.t -> Signed.sint -> t list
-
 val to_string : t -> string
-
 val iter_defns : defns -> (Signed.sint -> t -> unit) -> (t -> unit) -> unit
-
 val string_of_defns : defns -> string
-
 val defns_of_string : string -> defns
-
 val check_errno : (unit -> 'a) -> ('a, error) Result.result
-
 val string_of_error : error -> string

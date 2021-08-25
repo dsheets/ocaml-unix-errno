@@ -1,0 +1,40 @@
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))
+
+(library
+ (public_name unix-errno.unix)
+ (name unix_errno_unix)
+ (foreign_stubs
+  (language c)
+  (names unix_errno_util))
+ (libraries unix_errno ctypes.stubs))
+
+(rule
+ (target unix_errno_types_detected.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run ../lib_gen/unix_errno_types_detect.exe))))
+
+(rule
+ (target unix_errno_types.ml)
+ (deps
+  (:orig ../lib_gen/unix_errno_types.ml))
+ (action
+  (copy %{orig} %{target})))
+
+(rule
+ (target unix_errno_bindings.ml)
+ (deps
+  (:orig ../lib_gen/unix_errno_bindings.ml))
+ (action
+  (copy %{orig} %{target})))
+
+(rule
+ (target unix_errno_generated.ml)
+ (action
+  (with-stdout-to
+   %{target}
+   (run ../lib_gen/unix_errno_bindgen.exe))))

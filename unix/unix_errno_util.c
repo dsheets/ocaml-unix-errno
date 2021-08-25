@@ -8,9 +8,13 @@
 
 #define FORCE_CHECK 0
 
-#define LINUX defined(__linux__)
-#define APPLE defined(__APPLE__)
-#define FREEBSD defined(__FreeBSD__)
+#if defined(__linux__)
+#define LINUX 1
+#elif defined(__APPLE__)
+#define APPLE 1
+#elif defined(__FreeBSD__)
+#define FREEBSD 1
+#endif
 
 void unix_errno_reset() { errno = 0; }
 

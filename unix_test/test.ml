@@ -16,7 +16,6 @@
  *)
 
 module ErrnoMap = struct
-
   let roundtrip () =
     let defns = Errno.Host.to_defns Errno_unix.host in
     print_endline "after defns_of_host";
@@ -28,15 +27,9 @@ module ErrnoMap = struct
     print_endline "after string_of_defns2";
     Alcotest.(check string) "roundtrip local defns" s rs
 
-  let tests = [
-    "roundtrip", `Quick, roundtrip;
-  ]
-
+  let tests = [("roundtrip", `Quick, roundtrip)]
 end
 
-let tests = [
-  "errno-map", ErrnoMap.tests;
-]
+let tests = [("errno-map", ErrnoMap.tests)];;
 
-;;
 Alcotest.run "unix-errno" tests

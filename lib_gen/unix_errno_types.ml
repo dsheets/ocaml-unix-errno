@@ -15,8 +15,7 @@
  *
  *)
 
-module C(F: Cstubs.Types.TYPE) = struct
-
+module C (F : Cstubs.Types.TYPE) = struct
   let e2big = F.(constant "E2BIG" sint)
   let eacces = F.(constant "EACCES" sint)
   let eaddrinuse = F.(constant "EADDRINUSE" sint)
@@ -102,5 +101,4 @@ module C(F: Cstubs.Types.TYPE) = struct
   let eusers = F.(constant "EUSERS" sint)
   let ewouldblock = F.(constant "EWOULDBLOCK" sint)
   let exdev = F.(constant "EXDEV" sint)
-
 end

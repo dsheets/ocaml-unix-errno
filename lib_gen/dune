@@ -1,0 +1,29 @@
+(executable
+ (name unix_errno_bindgen)
+ (modules unix_errno_bindgen unix_errno_bindings)
+ (libraries ctypes.stubs))
+
+(executable
+ (name unix_errno_typegen)
+ (modules unix_errno_typegen unix_errno_types)
+ (libraries ctypes.stubs))
+
+(rule
+ (target unix_errno_types_detect.c)
+ (action
+  (run ./unix_errno_typegen.exe)))
+
+(rule
+ (target unix_errno_types_detect.exe)
+ (deps
+  (:c_file unix_errno_types_detect.c))
+ (action
+  (run
+   %{cc}
+   %{c_file}
+   -I
+   %{lib:ctypes.stubs:}
+   -I
+   %{ocaml_where}
+   -o
+   %{target})))

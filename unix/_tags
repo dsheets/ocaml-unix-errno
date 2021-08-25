@@ -1,3 +1,0 @@
-<*.{ml,mli}>: package(bytes), package(ctypes.stubs)
-<unix_errno_stubs.c>: use_ctypes, use_errno_util
-<*.{cma,cmxa}>: use_errno_stubs

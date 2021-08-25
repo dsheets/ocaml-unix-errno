@@ -1,2 +1,0 @@
-<errno_map.*>: package(ctypes.stubs), use_errno_stubs
-<*.*>: package(ctypes)

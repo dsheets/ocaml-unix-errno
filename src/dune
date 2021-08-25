@@ -1,0 +1,4 @@
+(executable
+ (name errno_srcgen)
+ (libraries integers result)
+ (modules errno_srcgen errno))

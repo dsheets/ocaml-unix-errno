@@ -1,0 +1,27 @@
+(library
+ (name unix_errno)
+ (public_name unix-errno)
+ (synopsis "Unix errno types, maps, and support")
+ (libraries integers result)
+ (wrapped
+  (transition
+   "Top-level modules are now wrapped inside Unix_error and will be removed in a future version"))
+ (modules errno errno_host errno_map_linux_4_4_6 errno_map_osx_10_11_4))
+
+(rule
+ (target errno_map_linux_4_4_6.ml)
+ (deps
+  (:map ../maps/linux_4_4_6))
+ (action
+  (with-stdout-to
+   %{target}
+   (run ../src/errno_srcgen.exe %{map}))))
+
+(rule
+ (target errno_map_osx_10_11_4.ml)
+ (deps
+  (:map ../maps/osx_10_11_4))
+ (action
+  (with-stdout-to
+   %{target}
+   (run ../src/errno_srcgen.exe ${map}))))
