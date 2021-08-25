@@ -5,10 +5,10 @@
 
 (library
  (public_name unix-errno.unix)
- (name unix_errno_unix)
+ (name errno_unix)
  (foreign_stubs
   (language c)
-  (names unix_errno_util))
+  (names unix_errno_util unix_errno_stubs))
  (libraries unix_errno ctypes.stubs))
 
 (rule
@@ -35,6 +35,9 @@
 (rule
  (target unix_errno_generated.ml)
  (action
-  (with-stdout-to
-   %{target}
-   (run ../lib_gen/unix_errno_bindgen.exe))))
+   (run ../lib_gen/unix_errno_bindgen.exe)))
+
+(rule
+ (target unix_errno_stubs.c)
+ (action
+   (run ../lib_gen/unix_errno_bindgen.exe)))

@@ -15,6 +15,8 @@
  *
  *)
 
+open Unix_errno
+
 module ErrnoMap = struct
   let roundtrip () =
     let defns = Errno.Host.to_defns Errno_unix.host in
