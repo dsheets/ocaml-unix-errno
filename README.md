@@ -1,6 +1,8 @@
 ocaml-unix-errno
 ================
 
+**ARCHIVED -- development continues at [xapi-project/ocaml-unix-errno](https://github.com/xapi-project/ocaml-unix-errno)**
+
 [ocaml-unix-errno](https://github.com/dsheets/ocaml-unix-errno) provides
 an errno variant similar to `Unix.error` but including POSIX 2008,
 Linux, OS X, and FreeBSD constructors. A macro definition type, `defns`
